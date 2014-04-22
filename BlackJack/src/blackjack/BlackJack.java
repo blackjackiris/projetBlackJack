@@ -19,7 +19,7 @@ public class BlackJack {
         // TODO code application logic here
         
         // yolo code 
-        //yolo ta maman
+        // test
         int cd;
     }
     
