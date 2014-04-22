@@ -12,7 +12,7 @@ public class Carte {
     
     private byte valeur;
     private byte couleur;
-    private int idCarte;
+    private String idCarte;
     
        
     /**
@@ -21,7 +21,7 @@ public class Carte {
      * @param couleur
      * @param idCarte 
      */
-    public Carte(byte valeur, byte couleur, int idCarte) {
+    public Carte(byte valeur, byte couleur, String idCarte) {
         this.valeur = valeur;
         this.couleur = couleur;
         this.idCarte = idCarte;
@@ -34,7 +34,7 @@ public class Carte {
   public Carte(Carte c) {
         this.valeur = c.valeur;
         this.couleur = c.couleur;
-        this.idCarte = c.idCarte;       
+        this.idCarte = c.idCarte;
     }  
     
    
