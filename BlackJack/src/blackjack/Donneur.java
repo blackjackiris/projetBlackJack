@@ -9,8 +9,10 @@ public class Donneur {
  
     public Carte main;
 
-  
-    public void jouer() {
+  /**
+   * Intelligence artificielle du donneur
+   */
+    public void jeuCroupier() {
     }
 
 }

@@ -12,12 +12,25 @@ package blackjack;
  */
 public class Carte {
 
-    /**
-     * @param args the command line arguments
-     */
+
     
     private byte valeur;
     private byte couleur;
+    private int idCarte;
+
+    /**
+     * Constructeur
+     * @param valeur
+     * @param couleur
+     * @param idCarte 
+     */
+    public Carte(byte valeur, byte couleur, int idCarte) {
+        this.valeur = valeur;
+        this.couleur = couleur;
+        this.idCarte = idCarte;
+    }
+
+    
     
     public static void main(String[] args) {
         // TODO code application logic here
