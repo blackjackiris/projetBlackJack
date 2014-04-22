@@ -6,13 +6,21 @@
 
 package blackjack;
 
-
-
+/**
+ *
+ * @author croux
+ */
 public class Carte {
 
-    public int valeur;
-
-
-    public Byte couleur;
-
+    /**
+     * @param args the command line arguments
+     */
+    
+    private byte valeur;
+    private byte couleur;
+    
+    public static void main(String[] args) {
+        // TODO code application logic here
+    }
+    
 }
