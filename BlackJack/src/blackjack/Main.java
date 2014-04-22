@@ -9,29 +9,41 @@ package blackjack;
 
 public class Main {
  
-    public int valeurMain;
-    boolean victoire;
+    public int valeurMain = 0;
 
+ int nbCarteMain=0;
 
     Carte [ ] main = new Carte[10];
     
     /**
      * Constructeurs
      * @param valeurMain
-     * @param victoire
+     * @param nbCarteMain
      */
-    public Main(int valeurMain, boolean victoire) {
+    public Main(int valeurMain,int nbCarteMain) {
         this.valeurMain = valeurMain;
-        this.victoire = victoire;
+        this.nbCarteMain = nbCarteMain;
     }
 
     
 
+/**
+ * Méthode pour calculer la valeur de la main entière
+ * @return valeurMain
+ */
+    private int calculerResultat() {
 
-    private void calculerResultat() {
-
-            
-            
+        int cpt;
+   
+        
+        for (cpt=0;cpt<nbCarteMain;cpt++){
+        
+        valeurMain =  main[nbCarteMain].valeur + valeurMain;
+        
+        }
+        
+        
+            return valeurMain;
         }
         
     }

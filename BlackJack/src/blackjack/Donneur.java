@@ -7,7 +7,7 @@ package blackjack;
 
 public class Donneur {
  
-    public Carte main;
+    public Main mainDonneur;
 
   /**
    * Intelligence artificielle du donneur
