@@ -6,18 +6,15 @@
 
 package blackjack;
 
-/**
- *
- * @author croux
- */
-public class Carte {
 
+public class Carte {
 
     
     private byte valeur;
     private byte couleur;
     private int idCarte;
-
+    
+       
     /**
      * Constructeur
      * @param valeur
@@ -30,6 +27,18 @@ public class Carte {
         this.idCarte = idCarte;
     }
 
+    /**
+     * 
+     * @param c
+     */    
+  public Carte(Carte c) {
+        this.valeur = c.valeur;
+        this.couleur = c.couleur;
+        this.idCarte = c.idCarte;       
+    }  
+    
+   
+    
     
     
     public static void main(String[] args) {
