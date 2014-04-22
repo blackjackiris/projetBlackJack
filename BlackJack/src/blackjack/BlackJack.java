@@ -20,8 +20,9 @@ public class BlackJack {
         
         // yolo code 
         // test
-        int cd,dvd,yolo;
-
+        // instaswag maggle
+        
+        int cd;
     }
     
 }
