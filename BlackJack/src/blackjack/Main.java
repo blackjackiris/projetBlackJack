@@ -10,7 +10,7 @@ package blackjack;
 public class Main {
  
     public int valeurMain = 0;
-    boolean victoire;
+
  int nbCarteMain=0;
 
     Carte [ ] main = new Carte[10];
@@ -19,11 +19,9 @@ public class Main {
      * Constructeurs
      * @param valeurMain
      * @param nbCarteMain
-     * @param victoire
      */
-    public Main(int valeurMain,int nbCarteMain, boolean victoire) {
+    public Main(int valeurMain,int nbCarteMain) {
         this.valeurMain = valeurMain;
-        this.victoire = victoire;
         this.nbCarteMain = nbCarteMain;
     }
 
