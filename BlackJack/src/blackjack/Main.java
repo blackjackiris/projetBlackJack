@@ -11,7 +11,7 @@ public class Main {
  
     public int valeurMain;
     boolean victoire;
-
+   private int nbCarteMain=0;
 
     Carte [ ] main = new Carte[10];
     
@@ -20,9 +20,10 @@ public class Main {
      * @param valeurMain
      * @param victoire
      */
-    public Main(int valeurMain, boolean victoire) {
+    public Main(int valeurMain,int nbCarteMain, boolean victoire) {
         this.valeurMain = valeurMain;
         this.victoire = victoire;
+        this.nbCarteMain = nbCarteMain;
     }
 
     
