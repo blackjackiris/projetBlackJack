@@ -19,7 +19,7 @@ public class PaquetDeCarte {
         
         for(indice1 = 0; indice1 < 4; indice1 ++){
             
-            for(indice2 = 0; indice2 < 14; indice2 ++){
+            for(indice2 = 0; indice2 < 13; indice2 ++){
                 paquet[nbCarte] = new Carte(indice2, indice1, "" + indice1 + "" + indice2);
                 nbCarte ++;
             }
