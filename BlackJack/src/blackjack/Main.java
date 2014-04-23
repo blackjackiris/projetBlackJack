@@ -11,7 +11,7 @@ public class Main {
  
     public int valeurMain = 0;
 
- int nbCarteMain=0;
+    int nbCarteMain=0;
 
     Carte [ ] main = new Carte[10];
     

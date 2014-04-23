@@ -11,10 +11,10 @@ package blackjack;
  */
 public class BlackJack {
 
-    final int blackJack = 21;
-    boolean victoire;
-    Joueur j;
-    Donneur d;
+    private final int blackJack = 21;
+    private boolean victoire;
+    private Joueur j;
+    private Donneur d;
 
     /**
      * Méthode détérmination du gagnant

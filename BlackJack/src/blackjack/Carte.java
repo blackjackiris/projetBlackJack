@@ -7,12 +7,12 @@
 package blackjack;
 
 
-public class Carte {
+public class Carte{
 
-    
-    public byte valeur;
-    public byte couleur;
-    public String idCarte;
+    //Attributs
+    private byte valeur;
+    private byte couleur;
+    private String idCarte;
     
        
     /**
@@ -31,13 +31,21 @@ public class Carte {
      * 
      * @param c
      */    
-  public Carte(Carte c) {
+    public Carte(Carte c) {
         this.valeur = c.valeur;
         this.couleur = c.couleur;
         this.idCarte = c.idCarte;       
     }  
     
-   
+    //Méthodes
+    
+    /**
+     * 
+     */
+    //Affichage de l'id d'une carte, méthode de test uniquement, inutile pour le programme final
+    public void afficherIdCarte(){
+        System.out.println(idCarte);
+    }
     
     
     

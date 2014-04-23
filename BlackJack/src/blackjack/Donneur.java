@@ -7,6 +7,7 @@ package blackjack;
 
 public class Donneur {
  
+    //Attributs
     public Main mainDonneur;
 
   /**
