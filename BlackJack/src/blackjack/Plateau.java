@@ -17,6 +17,8 @@ public class Plateau extends javax.swing.JFrame {
      * Creates new form Plateau
      */
     public Plateau() {
+         Joueur.argentTotal = 1000;
+    
         initComponents();
     }
 
@@ -32,6 +34,9 @@ public class Plateau extends javax.swing.JFrame {
         bouton10 = new javax.swing.JButton();
         bouton5 = new javax.swing.JButton();
         valeurMise = new javax.swing.JLabel();
+        argent = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,20 +54,33 @@ public class Plateau extends javax.swing.JFrame {
             }
         });
 
-        valeurMise.setText("Valeur");
+        argent.setText("1000");
+
+        jLabel1.setText("Argent totale : ");
+
+        jLabel2.setText("Valeur de la mise :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(valeurMise, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
                         .addComponent(bouton10)
                         .addGap(59, 59, 59)
-                        .addComponent(bouton5)))
+                        .addComponent(bouton5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(argent))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(valeurMise, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(155, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -72,9 +90,19 @@ public class Plateau extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bouton10)
                     .addComponent(bouton5))
-                .addGap(73, 73, 73)
-                .addComponent(valeurMise, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(valeurMise, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addGap(37, 37, 37)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(argent)
+                    .addComponent(jLabel1))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -82,14 +110,19 @@ public class Plateau extends javax.swing.JFrame {
 
     private void bouton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bouton10MouseClicked
 Joueur.mise =   Joueur.mise + 10;
+Joueur.argentTotal = Joueur.argentTotal - 10;
 
 valeurMise.setText(String.valueOf(Joueur.mise));
+ argent.setText(String.valueOf(Joueur.argentTotal));
 // TODO add your handling code here:
     }//GEN-LAST:event_bouton10MouseClicked
 
     private void bouton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bouton5MouseClicked
 Joueur.mise =   Joueur.mise + 5;
-valeurMise.setText(String.valueOf(Joueur.mise));// TODO add your handling code here:
+Joueur.argentTotal = Joueur.argentTotal - 5;
+valeurMise.setText(String.valueOf(Joueur.mise));
+ argent.setText(String.valueOf(Joueur.argentTotal));
+// TODO add your handling code here:
     }//GEN-LAST:event_bouton5MouseClicked
 
     /**
@@ -128,8 +161,11 @@ valeurMise.setText(String.valueOf(Joueur.mise));// TODO add your handling code h
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel argent;
     private javax.swing.JButton bouton10;
     private javax.swing.JButton bouton5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel valeurMise;
     // End of variables declaration//GEN-END:variables
 }

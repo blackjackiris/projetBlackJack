@@ -8,7 +8,7 @@ public class Joueur{
   
     //Attributs
     public static int mise;
-    public int argentTotal;
+    public static int argentTotal;
     public Main mainJoueur;
 
     
@@ -34,7 +34,7 @@ public class Joueur{
     */
     public void miser() {
         
-        
+        argentTotal = argentTotal-mise;
     }
 
     /**
