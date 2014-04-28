@@ -10,9 +10,9 @@ package blackjack;
 public class Carte{
 
     //Attributs
-    private byte valeur;
-    private byte couleur;
-    private String idCarte;
+    public byte valeur;
+    public byte couleur;
+    public String idCarte;
     
        
     /**
