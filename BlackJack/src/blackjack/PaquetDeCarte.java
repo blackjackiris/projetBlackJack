@@ -65,17 +65,18 @@ public class PaquetDeCarte{
      */
     public void melanger() {
         
-        //Mauvais, à revoir
-        
-        for(byte indice = 0; indice < paquet.length; indice ++){
-            //Création aléatoire d'un entier
-            int alea = (int)(Math.random() * (paquet.length - 0));
-            //Stockage de l'entier crée aléatoirement
-            Carte tmp = paquet[alea];
-            //Changement d'emplacement mémoire des valeurs
-            paquet[indice] = paquet[alea];
-            paquet[alea] = tmp;
-        }
+    
+         
+           int longeurPaquet = paquet.length;
+           
+              for (int i = 0; i < longeurPaquet; i++)
+    {
+        // between i and longeurPaquet-1
+        int alea = i + (int) (Math.random() * (longeurPaquet-i));
+        Carte tmp = paquet[i];    // swap
+        paquet[i] = paquet[alea];
+        paquet[alea] = tmp;
+    }
     }
     
     /**
