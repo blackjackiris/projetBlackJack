@@ -22,7 +22,17 @@ public class Carte{
      * @param idCarte 
      */
     public Carte(byte valeur, byte couleur, String idCarte) {
-        this.valeur = valeur;
+        
+        //Si la carte est une tête, valeur = 10
+        if(valeur > 9){
+            this.valeur = 10;
+        }
+        //Sinon, valeur = valeur passée en paramètre + 1
+        else{
+            valeur ++;
+            this.valeur = valeur;
+        }
+        
         this.couleur = couleur;
         this.idCarte = idCarte;
     }
@@ -35,7 +45,11 @@ public class Carte{
         this.valeur = c.valeur;
         this.couleur = c.couleur;
         this.idCarte = c.idCarte;       
-    }  
+    }
+    
+    public Carte(){
+        
+    }
     
     //Méthodes
     

@@ -6,7 +6,7 @@ package blackjack;
 public class PaquetDeCarte{
     
     //Attributs
-    private Carte [ ] paquet;
+    private Carte [] paquet;
     private int nbCarte;
     
     //Constructeur
@@ -53,9 +53,12 @@ public class PaquetDeCarte{
     public PaquetDeCarte(int nbCarte) {
         this.nbCarte = nbCarte;
     }
-
+    
+    /**
+     * 
+     * @param pcarte 
+     */
     public PaquetDeCarte(PaquetDeCarte pcarte){
-        
         this.nbCarte = pcarte.nbCarte;
     }
 
@@ -65,18 +68,48 @@ public class PaquetDeCarte{
      */
     public void melanger() {
         
-    
-         
-           int longeurPaquet = paquet.length;
-           
-              for (int i = 0; i < longeurPaquet; i++)
-    {
-        // between i and longeurPaquet-1
-        int alea = i + (int) (Math.random() * (longeurPaquet-i));
-        Carte tmp = paquet[i];    // swap
-        paquet[i] = paquet[alea];
-        paquet[alea] = tmp;
+        int alea1, alea2;
+        Carte swap;
+        
+        //La boucle execute 1000 fois l'opération suivante :
+        //2 cartes sont choisie aléatoirement dans le paquet
+        //La 1ère carte choisie prend les valeurs de la 2nd, et inversement
+        for(int indice = 0; indice < 1000; indice ++){
+            //Génération d'un 1er nombre aléatoire, compris entre 0 et 51
+            alea1 = (int) (Math.random() * (paquet.length));
+            
+            //Génération d'un 2nd nombre aléatoire, compris entre 0 et 51, relancer la génération tant qu'il est identique au 1er nombre
+            do{
+                alea2 = (int) (Math.random() * (paquet.length));
+            }while(alea2 == alea1);
+            
+            //Invertion des cartes numéro "alea1" et "aléa2"
+            //La Carte swap prends les valeurs de la 1ère carte choisie
+            swap = paquet[alea1];
+            //La 1ère carte choisie prends les valeurs la 2nd carte choisie
+            paquet[alea1] = paquet[alea2];
+            //Les valeurs stockées dans swap sont mises dans la 2nd carte choisie
+            paquet[alea2] = swap;
+        }
     }
+    
+    /**
+     * 
+     * @return carteTiree
+     */
+    public Carte tirerCarte(){
+        
+        //La 1ère carte du tableau est stockée dans carteTiree
+        Carte carteTiree = paquet[0];
+        byte indice;
+        
+        //Déplacement de toutes les cartes d'une position en arrière
+        for(indice = 0; indice < paquet.length; indice ++){
+            paquet[indice] = paquet[indice + 1];
+        }
+        
+        nbCarte --;
+        return carteTiree;
     }
     
     /**

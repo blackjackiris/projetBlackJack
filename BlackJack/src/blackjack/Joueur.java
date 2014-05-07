@@ -40,8 +40,8 @@ public class Joueur{
     /**
      * Permet au joueur de tirer une carte
      */
-    public void tirer() {
-    mainJoueur.nbCarteMain ++;
+    public void tirerUneCarte() {
+//        mainJoueur.nbCarteMain ++;
     }
 
     /**
