@@ -10,9 +10,9 @@ package blackjack;
 public class Carte{
 
     //Attributs
-    public byte valeur;
-    public byte couleur;
-    public String idCarte;
+    private byte valeur;
+    private byte couleur;
+    private String idCarte;
     
        
     /**
@@ -61,7 +61,9 @@ public class Carte{
         System.out.println(idCarte);
     }
     
-    
+    public byte getValeur(){
+        return valeur;
+    }
     
     public static void main(String[] args) {
         // TODO code application logic here
