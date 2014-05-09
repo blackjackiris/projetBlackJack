@@ -5,43 +5,46 @@ package blackjack;
 
 
 public class Joueur{
-  
-    //Attributs
-    public static int mise;
-    public static int argentTotal;
-    public Main mainJoueur;
 
+    //Attributs
+    private int mise;
+    private int argentTotal;
+    private Main mainJoueur;
+
+    //Constructeurs
+    /**
+     * 
+     */
+    public Joueur(){
+        mise = 0;
+        argentTotal = 1000;
+        mainJoueur = new Main();
+    }
     
     /**
-     * Constructeur
      * @param mise
      * @param argentTotal
      * @param mainJoueur
      */
-    
     public Joueur(int mise, int argentTotal, Main mainJoueur) {
         this.mise = mise;
         this.argentTotal = argentTotal;
         this.mainJoueur = mainJoueur;
-        
-        
     }
-
     
     /**
-    * Méthode
+    * Méthodes
     * Permet au joueur de miser
     */
     public void miser() {
-        
-        argentTotal = argentTotal-mise;
+        argentTotal = argentTotal - mise;
     }
 
     /**
      * Permet au joueur de tirer une carte
      */
     public void tirerUneCarte() {
-//        mainJoueur.nbCarteMain ++;
+        mainJoueur.tirerCarte();
     }
 
     /**
@@ -69,5 +72,7 @@ public class Joueur{
      */
     public void assurance() {
     }
+    
+    
 
 }
