@@ -8,7 +8,7 @@ package blackjack;
 public class Donneur {
  
     //Attributs
-    public Main mainDonneur;
+    private Main mainDonneur;
 
   /**
    * Intelligence artificielle du donneur
