@@ -11,19 +11,28 @@ package blackjack;
  */
 public class BlackJack {
 
-    private final int blackJack = 21;
+    //Attributs
+    private final byte BLACKJACK = 21;
     private boolean victoire;
     private Joueur j;
     private Donneur d;
+    public static PaquetDeCartes jeuDeCartes;
+    
+    //Constructeur
+    public BlackJack(){
+        j = new Joueur();
+        d = new Donneur();
+        jeuDeCartes = new PaquetDeCartes();
+    }
 
     /**
      * Méthode détérmination du gagnant
      */
-    public void Victoire() {
+    public void victoire() {
 
         // victoire du donneur
-       // Si la valeur de la main du croupier = 21
-        if ((d.mainDonneur.valeurMain) == blackJack) {
+        // Si la valeur de la main du croupier = 21
+        if ((d.mainDonneur.getValeurMain()) == BLACKJACK) {
 
             victoire = false;
         }
@@ -60,7 +69,10 @@ public class BlackJack {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-
+        
+        BlackJack partie = new BlackJack();
+        
+        
     }
 
 }
