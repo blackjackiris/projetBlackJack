@@ -17,7 +17,7 @@ public class Plateau extends javax.swing.JFrame {
      * Creates new form Plateau
      */
     public Plateau() {
-         Joueur.argentTotal = 1000;
+        Joueur.argentTotal = 1000;
     
         initComponents();
     }
@@ -103,20 +103,20 @@ public class Plateau extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bouton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bouton10MouseClicked
-Joueur.mise =   Joueur.mise + 10;
-Joueur.argentTotal = Joueur.argentTotal - 10;
+        // TODO add your handling code here:
+        Joueur.mise = Joueur.mise + 10;
+        Joueur.argentTotal = Joueur.argentTotal - 10;
 
-valeurMise.setText(String.valueOf(Joueur.mise));
- argent.setText(String.valueOf(Joueur.argentTotal));
-// TODO add your handling code here:
+        valeurMise.setText(String.valueOf(Joueur.mise));
+        argent.setText(String.valueOf(Joueur.argentTotal));
     }//GEN-LAST:event_bouton10MouseClicked
 
     private void bouton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bouton5MouseClicked
-Joueur.mise =   Joueur.mise + 5;
-Joueur.argentTotal = Joueur.argentTotal - 5;
-valeurMise.setText(String.valueOf(Joueur.mise));
- argent.setText(String.valueOf(Joueur.argentTotal));
-// TODO add your handling code here:
+        // TODO add your handling code here:
+        Joueur.mise = Joueur.mise + 5;
+        Joueur.argentTotal = Joueur.argentTotal - 5;
+        valeurMise.setText(String.valueOf(Joueur.mise));
+        argent.setText(String.valueOf(Joueur.argentTotal));
     }//GEN-LAST:event_bouton5MouseClicked
 
     /**
