@@ -53,7 +53,7 @@ public class Main {
     }
     
     public void tirerCarte(){
-        main[indiceMain] = BlackJack.jeuDeCartes.piocherCarte();
+    //    main[indiceMain] = BlackJack.jeuDeCartes.piocherCarte();
         nbCarteMain ++;
         indiceMain ++;
     }

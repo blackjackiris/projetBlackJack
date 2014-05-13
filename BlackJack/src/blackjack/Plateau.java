@@ -6,6 +6,8 @@
 
 package blackjack;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author PC
@@ -39,7 +41,8 @@ public class Plateau extends javax.swing.JFrame {
     
         initComponents();
     }
-/**
+
+    /**
      * Méthode détérmination du gagnant
      */
     public void victoire() {
@@ -89,22 +92,20 @@ public class Plateau extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bouton10 = new javax.swing.JButton();
         bouton5 = new javax.swing.JButton();
+        boutonTirer = new javax.swing.JButton();
         valeurMise = new javax.swing.JLabel();
         argent = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        bouton10 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
-
-        bouton10.setText("10");
-        bouton10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bouton10MouseClicked(evt);
-            }
-        });
+        setMaximumSize(new java.awt.Dimension(720, 520));
+        setMinimumSize(new java.awt.Dimension(720, 520));
+        setPreferredSize(new java.awt.Dimension(720, 520));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bouton5.setText("5");
         bouton5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -112,55 +113,50 @@ public class Plateau extends javax.swing.JFrame {
                 bouton5MouseClicked(evt);
             }
         });
+        bouton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bouton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bouton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, -1, -1));
+
+        boutonTirer.setText("Tirer");
+        boutonTirer.setRolloverEnabled(false);
+        boutonTirer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonTirerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boutonTirer, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, -1, -1));
+        getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, 60, 14));
 
         argent.setText("1000");
+        getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
 
         jLabel1.setText("Argent totale : ");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, -1, -1));
+
+        bouton10.setText("10");
+        bouton10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bouton10MouseClicked(evt);
+            }
+        });
+        getContentPane().add(bouton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, -1, -1));
 
         jLabel2.setText("Valeur de la mise :");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bouton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bouton10))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(argent))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(valeurMise, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(228, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(225, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bouton5)
-                    .addComponent(bouton10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(valeurMise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(argent)
-                    .addComponent(jLabel1))
-                .addContainerGap())
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blackjack/Cartes/imgPlateau.jpeg"))); // NOI18N
+        jLabel3.setFocusable(false);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 520));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void bouton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bouton10MouseClicked
         // TODO add your handling code here:
 //        Joueur.mise = Joueur.mise + 10;
@@ -177,6 +173,16 @@ public class Plateau extends javax.swing.JFrame {
 //        valeurMise.setText(String.valueOf(Joueur.mise));
 //        argent.setText(String.valueOf(Joueur.argentTotal));
     }//GEN-LAST:event_bouton5MouseClicked
+
+    private void bouton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bouton5ActionPerformed
+
+    private void boutonTirerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonTirerActionPerformed
+        // TODO add your handling code here:
+        Graphics monDC = getGraphics();
+        monDC.drawString("titi est content", 200, 200);
+    }//GEN-LAST:event_boutonTirerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,18 +213,22 @@ public class Plateau extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Plateau().setVisible(true);
             }
         });
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel argent;
     private javax.swing.JButton bouton10;
     private javax.swing.JButton bouton5;
+    private javax.swing.JButton boutonTirer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel valeurMise;
     // End of variables declaration//GEN-END:variables
 }
