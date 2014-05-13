@@ -8,12 +8,17 @@ package blackjack;
 public class Donneur extends Personne{
 
     //Constructeurs
+    
+    
+    /**
+     * Constructeurs par default
+     */
     public Donneur(){
         super();
     }
     
     /**
-     * 
+     * Constructeurs
      * @param mainDonneur 
      */
     public Donneur(Main mainDonneur) {
@@ -21,7 +26,7 @@ public class Donneur extends Personne{
     }
     
     /**
-     * 
+     * Constructeurs
      * @param d
      */
     public Donneur(Donneur d){
