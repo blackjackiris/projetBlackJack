@@ -9,6 +9,10 @@ public class Joueur extends Personne{
     //Attributs
     private int mise;
     private int argentTotal;
+
+    public int getMise() {
+        return mise;
+    }
     
 
     //Constructeurs
@@ -84,6 +88,7 @@ public class Joueur extends Personne{
 
     /**
      * Permet au joueur de prendre une assurance lorsque le donneur à un As visible dans sa main de base
+     * @return 
      */
     public int assurance() {
         mise /= 2;

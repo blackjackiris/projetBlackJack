@@ -120,7 +120,6 @@ public class Plateau extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(720, 540));
         setMinimumSize(new java.awt.Dimension(720, 520));
-        setPreferredSize(new java.awt.Dimension(720, 540));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
