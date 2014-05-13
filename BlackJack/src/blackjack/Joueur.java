@@ -4,21 +4,21 @@ package blackjack;
 
 
 
-public class Joueur{
+public class Joueur extends Personne{
 
     //Attributs
     private  int mise;
     private int argentTotal;
-    private Main mainJoueur;
+    
 
     //Constructeurs
     /**
      * 
      */
     public Joueur(){
+        super();
         mise = 0;
         argentTotal = 1000;
-        mainJoueur = new Main();
     }
     
     /**
@@ -27,9 +27,19 @@ public class Joueur{
      * @param mainJoueur
      */
     public Joueur(int mise, int argentTotal, Main mainJoueur) {
+        super(mainJoueur);
         this.mise = mise;
         this.argentTotal = argentTotal;
-        this.mainJoueur = mainJoueur;
+    }
+    
+    /**
+     * 
+     * @param j 
+     */
+    public Joueur(Joueur j){
+        super(j);
+        mise = j.mise;
+        argentTotal = j.argentTotal;
     }
     
     /**
@@ -45,20 +55,13 @@ public class Joueur{
     }
 
     public Main getMainJoueur() {
-        return mainJoueur;
+        return main;
     }
 
     
     
     public void miser() {
         argentTotal = argentTotal - mise;
-    }
-
-    /**
-     * Permet au joueur de tirer une carte
-     */
-    public void tirerUneCarte() {
-        mainJoueur.tirerCarte();
     }
 
     /**

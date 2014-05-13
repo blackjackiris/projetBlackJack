@@ -5,18 +5,33 @@ package blackjack;
 
 
 
-public class Donneur {
- 
-    //Attributs
-    private Main mainDonneur;
+public class Donneur extends Personne{
 
-    
-
-    
-    public Main getMainDonneur() {
-        return mainDonneur;
+    //Constructeurs
+    public Donneur(){
+        super();
     }
-
+    
+    /**
+     * 
+     * @param mainDonneur 
+     */
+    public Donneur(Main mainDonneur) {
+        super(mainDonneur);
+    }
+    
+    /**
+     * 
+     * @param d
+     */
+    public Donneur(Donneur d){
+        super(d);
+    }
+    
+    //Methode
+    public Main getMainDonneur() {
+        return main;
+    }
     
   
    /**
