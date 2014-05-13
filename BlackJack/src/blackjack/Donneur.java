@@ -18,7 +18,8 @@ public class Donneur {
     }
 
     
-  /**
+  
+   /**
    * Intelligence artificielle du donneur
    */
     

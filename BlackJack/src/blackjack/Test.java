@@ -16,7 +16,7 @@ public class Test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        PaquetDeCarte p = new PaquetDeCarte();
+        PaquetDeCartes p = new PaquetDeCartes();
         
         p.testContenuPaquet();
         p.melanger();

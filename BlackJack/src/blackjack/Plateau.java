@@ -97,6 +97,7 @@ public class Plateau extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         bouton10.setText("10");
         bouton10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -162,19 +163,19 @@ public class Plateau extends javax.swing.JFrame {
 
     private void bouton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bouton10MouseClicked
         // TODO add your handling code here:
-        Joueur.mise = Joueur.mise + 10;
-        Joueur.argentTotal = Joueur.argentTotal - 10;
-
-        valeurMise.setText(String.valueOf(Joueur.mise));
-        argent.setText(String.valueOf(Joueur.argentTotal));
+//        Joueur.mise = Joueur.mise + 10;
+//        Joueur.argentTotal = Joueur.argentTotal - 10;
+//
+//        valeurMise.setText(String.valueOf(Joueur.mise));
+//        argent.setText(String.valueOf(Joueur.argentTotal));
     }//GEN-LAST:event_bouton10MouseClicked
 
     private void bouton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bouton5MouseClicked
         // TODO add your handling code here:
-        Joueur.mise = Joueur.mise + 5;
-        Joueur.argentTotal = Joueur.argentTotal - 5;
-        valeurMise.setText(String.valueOf(Joueur.mise));
-        argent.setText(String.valueOf(Joueur.argentTotal));
+//        Joueur.mise = Joueur.mise + 5;
+//        Joueur.argentTotal = Joueur.argentTotal - 5;
+//        valeurMise.setText(String.valueOf(Joueur.mise));
+//        argent.setText(String.valueOf(Joueur.argentTotal));
     }//GEN-LAST:event_bouton5MouseClicked
 
     /**

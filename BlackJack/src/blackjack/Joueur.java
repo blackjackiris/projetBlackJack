@@ -7,7 +7,7 @@ package blackjack;
 public class Joueur{
 
     //Attributs
-    private int mise;
+    private  int mise;
     private int argentTotal;
     private Main mainJoueur;
 
