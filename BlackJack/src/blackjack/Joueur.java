@@ -33,9 +33,23 @@ public class Joueur{
     }
     
     /**
-    * Méthodes
-    * Permet au joueur de miser
-    */
+     * Méthodes
+     * Permet au joueur de miser
+     */
+    /**
+     * getter pour le plateau
+     * @return 
+     */
+    public int getArgentTotal() {
+        return argentTotal;
+    }
+
+    public Main getMainJoueur() {
+        return mainJoueur;
+    }
+
+    
+    
     public void miser() {
         argentTotal = argentTotal - mise;
     }
