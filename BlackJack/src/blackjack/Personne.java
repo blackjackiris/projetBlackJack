@@ -36,8 +36,7 @@ public class Personne {
     }
     
     //Methode
-    public void tirer() {
-        PaquetDeCartes paquet = Plateau.getPaquet();
+    public void tirer(PaquetDeCartes paquet) {
         Carte stkg = paquet.piocherCarte();
         main.ajouterCarte(stkg);
     }
