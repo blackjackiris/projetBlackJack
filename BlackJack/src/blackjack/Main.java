@@ -8,12 +8,15 @@ package blackjack;
 
 
 public class Main {
- 
+    
+    //Attributs
     private byte valeurMain;
     private byte nbCarteMain;
     private byte indiceMain;
+    private int miseAttribuee;
     private Carte [] main;
     
+    //Constructeur
     /**
      * 
      */
@@ -21,6 +24,7 @@ public class Main {
         valeurMain = 0;
         nbCarteMain = 0;
         indiceMain = 0;
+        miseAttribuee = 0;
         main = new Carte[10];
     }
     
@@ -29,12 +33,15 @@ public class Main {
      * @param valeurMain
      * @param nbCarteMain
      */
-    public Main(byte valeurMain, byte nbCarteMain) {
+    public Main(byte valeurMain, byte nbCarteMain, int miseAttribuee) {
         this.valeurMain = valeurMain;
         this.nbCarteMain = nbCarteMain;
+        this.miseAttribuee = miseAttribuee;
     }
 
-    
+    public Main(int miseAttribuee) {
+        this.miseAttribuee = miseAttribuee;
+    }
 
     /**
      * Méthode pour calculer la valeur de la main entière
@@ -52,10 +59,21 @@ public class Main {
         return valMain;
     }
     
+    /**
+     * 
+     * @param nouvelleCarte 
+     */
     public void ajouterCarte(Carte nouvelleCarte){
         main[indiceMain]= nouvelleCarte;
         nbCarteMain ++;
         indiceMain ++;
+    }
+    
+    public Carte enleverCarte(){
+        Carte stkg = main[indiceMain];
+        main[indiceMain] = new Carte();
+        indiceMain --;
+        return stkg;
     }
 }
 
