@@ -7,7 +7,7 @@ package blackjack;
 public class Joueur extends Personne{
 
     //Attributs
-    private  int mise;
+    private int mise;
     private int argentTotal;
     
 
@@ -65,31 +65,36 @@ public class Joueur extends Personne{
     }
 
     /**
-     * Permet au joueur de partage ces cartes en deux lorsqu'il possède un double dans sa main de base
-     */
-    public void partager() {
-        
-    }
-
-    /**
      * Permet au joueur de d'arreter de piocher
+     * @param stay
+     * @return 
      */
-    public void rester() {
-        
+    public boolean rester(boolean stay) {
+        stay = true;
+        return stay;
     }
 
     /**
      * Permet au joueur de doubler ca mise lors de sa main de base mais le fait piocher une carte
      */
     public void doubler() {
+        mise *= 2;
+        tirer();
     }
 
     /**
      * Permet au joueur de prendre une assurance lorsque le donneur à un As visible dans sa main de base
      */
-    public void assurance() {
+    public int assurance() {
+        mise /= 2;
+        return mise;
     }
-    
-    
+
+     /**
+     * Permet au joueur de partage ces cartes en deux lorsqu'il possède un double dans sa main de base
+     */
+    public void partager() {
+        
+    }
 
 }

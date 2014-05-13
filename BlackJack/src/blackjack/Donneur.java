@@ -39,6 +39,13 @@ public class Donneur extends Personne{
    */
     
     public void jeuCroupier() {
+        
+        byte val;
+        
+        do{
+            tirer();
+            val = main.getValeurMain();
+        }while(val < 17);
     }
 
 }
