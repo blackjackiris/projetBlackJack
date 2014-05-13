@@ -9,11 +9,8 @@ public class Joueur extends Personne{
     //Attributs
     private int mise;
     private int argentTotal;
-
-    public int getMise() {
-        return mise;
-    }
-    
+    private Main[] mainMultiple;
+    private int indiceMainSup;
 
     //Constructeurs
     /**
@@ -22,6 +19,7 @@ public class Joueur extends Personne{
     public Joueur(){
         super();
         mise = 0;
+        indiceMainSup = 0;
         argentTotal = 1000;
     }
     
@@ -34,6 +32,7 @@ public class Joueur extends Personne{
         super(mainJoueur);
         this.mise = mise;
         this.argentTotal = argentTotal;
+        indiceMainSup = 0;
     }
     
     /**
@@ -44,6 +43,7 @@ public class Joueur extends Personne{
         super(j);
         mise = j.mise;
         argentTotal = j.argentTotal;
+        indiceMainSup = j.indiceMainSup;
     }
     
     /**
@@ -62,7 +62,17 @@ public class Joueur extends Personne{
         return main;
     }
 
+    public int getMise() {
+        return mise;
+    }
     
+    public int getNbMainSup(){
+        return indiceMainSup;
+    }
+    
+    public void setIndiceMainSupZero(){
+        indiceMainSup = 0;
+    }
     
     public void miser() {
         argentTotal = argentTotal - mise;
@@ -81,9 +91,9 @@ public class Joueur extends Personne{
     /**
      * Permet au joueur de doubler ca mise lors de sa main de base mais le fait piocher une carte
      */
-    public void doubler() {
+    public void doubler(PaquetDeCartes paquet) {
         mise *= 2;
-        tirer();
+        tirer(paquet);
     }
 
     /**
@@ -96,10 +106,13 @@ public class Joueur extends Personne{
     }
 
      /**
-     * Permet au joueur de partage ces cartes en deux lorsqu'il possède un double dans sa main de base
+     * Permet au joueur de partager ses cartes en deux lorsqu'il possède un double dans sa main de base
      */
     public void partager() {
-        
+        Carte split = main.enleverCarte();
+        mainMultiple[indiceMainSup] = new Main(mise);
+        mainMultiple[indiceMainSup].ajouterCarte(split);
+        indiceMainSup ++;
     }
 
 }
