@@ -52,8 +52,8 @@ public class Main {
         return valMain;
     }
     
-    public void tirerCarte(){
-        main[indiceMain] = Plateau.jeuDeCartes.piocherCarte();
+    public void ajouterCarte(Carte nouvelleCarte){
+        main[indiceMain]= nouvelleCarte;
         nbCarteMain ++;
         indiceMain ++;
     }

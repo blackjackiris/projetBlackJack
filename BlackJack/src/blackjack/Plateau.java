@@ -7,6 +7,8 @@
 package blackjack;
 
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  *
@@ -19,13 +21,20 @@ public class Plateau extends javax.swing.JFrame {
     private boolean victoire;
     private Joueur j;
     private Donneur d;
-    public static PaquetDeCartes jeuDeCartes;
+    private PaquetDeCartes jeuDeCartes;
+    private Graphics monDC ; 
+   
+    
+    
     
     Main mainDuDonneur;
     Main mainDuJoueur;
     int valeurMainDonneur;
     int valeurMainJoueur;
     int miseJoueur;
+    int indice = 0;
+    int y,x = 50;
+    
 
     /**
      * Creates new form Plateau
@@ -36,13 +45,18 @@ public class Plateau extends javax.swing.JFrame {
         d = new Donneur();
         jeuDeCartes = new PaquetDeCartes();
         
+        
         mainDuDonneur=d.getMainDonneur();
         mainDuJoueur=j.getMainJoueur();
+        miseJoueur=j.getMise();
         valeurMainDonneur=mainDuDonneur.getValeurMain();
         valeurMainJoueur=mainDuJoueur.getValeurMain();
-        
+       
+     
     
         initComponents();
+          monDC=getGraphics();
+  
     }
 
     /**
@@ -75,6 +89,10 @@ public class Plateau extends javax.swing.JFrame {
         }
     
  
+    }
+    
+    public PaquetDeCartes getPaquet(){
+        return jeuDeCartes;
     }
     
     /**
@@ -121,9 +139,9 @@ public class Plateau extends javax.swing.JFrame {
 
         boutonTirer.setText("Tirer");
         boutonTirer.setRolloverEnabled(false);
-        boutonTirer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boutonTirerActionPerformed(evt);
+        boutonTirer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boutonTirerMouseClicked(evt);
             }
         });
         getContentPane().add(boutonTirer, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
@@ -133,11 +151,11 @@ public class Plateau extends javax.swing.JFrame {
 
         Doubler.setText("Doubler");
         getContentPane().add(Doubler, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, -1, -1));
-        getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 60, 20));
+        getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 50, 20));
         getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 470, 50, 20));
 
         jLabel1.setText("Argent total : ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, -1, -1));
 
         bouton10.setText("10");
         bouton10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,11 +166,11 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(bouton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, -1, -1));
 
         jLabel2.setText("Valeur de la mise :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 100, 20));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blackjack/Cartes/imgPlateau.jpeg"))); // NOI18N
         jLabel3.setFocusable(false);
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 520));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 540));
 
         pack();
         setLocationRelativeTo(null);
@@ -162,30 +180,36 @@ public class Plateau extends javax.swing.JFrame {
     
     private void bouton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bouton10MouseClicked
        
-//        Joueur.mise = Joueur.mise + 10;
-//        Joueur.argentTotal = Joueur.argentTotal - 10;
-//
-//        valeurMise.setText(String.valueOf(Joueur.mise));
-//        argent.setText(String.valueOf(Joueur.argentTotal));
+        miseJoueur = miseJoueur + 10;
+        valeurMise.setText(String.valueOf(miseJoueur));
+       
     }//GEN-LAST:event_bouton10MouseClicked
 
     private void bouton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bouton5MouseClicked
        
-//        Joueur.mise = Joueur.mise + 5;
-//        Joueur.argentTotal = Joueur.argentTotal - 5;
-//        valeurMise.setText(String.valueOf(Joueur.mise));
-//        argent.setText(String.valueOf(Joueur.argentTotal));
+        miseJoueur = miseJoueur + 5;
+        valeurMise.setText(String.valueOf(miseJoueur));
     }//GEN-LAST:event_bouton5MouseClicked
 
     private void bouton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bouton5ActionPerformed
 
-    private void boutonTirerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonTirerActionPerformed
+    private void boutonTirerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonTirerMouseClicked
         // TODO add your handling code here:
-        Graphics monDC = getGraphics();
-        monDC.drawString("titi est content", 200, 200);
-    }//GEN-LAST:event_boutonTirerActionPerformed
+   
+            
+      //  monDC.drawString("titi est content", 200, 200);
+        Image img = Toolkit.getDefaultToolkit().getImage("src/image/" + jeuDeCartes.recuperIdCarte(indice) + ".png");  
+               
+        monDC.drawImage(img, 200 + x*indice, 200 + y*indice, null);
+       Image img2 = Toolkit.getDefaultToolkit().getImage("src/image/" + jeuDeCartes.recuperIdCarte(indice+1) + ".png");  
+        monDC.drawImage(img2, 200 + x*(indice+1), 200 + y*(indice+1), null);
+     valeurMise.setText(String.valueOf(jeuDeCartes.recuperIdCarte(indice)));
+     argent.setText(String.valueOf((indice)));
+     indice++;
+        
+    }//GEN-LAST:event_boutonTirerMouseClicked
 
     /**
      * @param args the command line arguments

@@ -64,6 +64,11 @@ public class Carte{
     public byte getValeur(){
         return valeur;
     }
+
+    public String getIdCarte() {
+        return idCarte;
+    }
+    
     
     public static void main(String[] args) {
         // TODO code application logic here
