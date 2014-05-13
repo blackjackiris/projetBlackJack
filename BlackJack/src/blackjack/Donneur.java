@@ -43,12 +43,12 @@ public class Donneur extends Personne{
    * Intelligence artificielle du donneur
    */
     
-    public void jeuCroupier() {
+    public void jeuCroupier(PaquetDeCartes paquet) {
         
         byte val;
         
         do{
-            tirer();
+            tirer(paquet);
             val = main.getValeurMain();
         }while(val < 17);
     }
