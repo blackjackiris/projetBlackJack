@@ -23,17 +23,12 @@ public class Plateau extends javax.swing.JFrame {
     private Donneur d;
     private PaquetDeCartes jeuDeCartes;
     private Graphics monDC ; 
-   
-    
-    
-    
-    Main mainDuDonneur;
-    Main mainDuJoueur;
-    int valeurMainDonneur;
-    int valeurMainJoueur;
-    int miseJoueur;
-    int indice = 0;
-    int y,x = 50;
+
+    private byte valeurMainDonneur;
+    private byte valeurMainJoueur;
+    private int miseJoueur;
+    private int indice = 0;
+    private int y,x = 50;
     
 
     /**
@@ -45,17 +40,12 @@ public class Plateau extends javax.swing.JFrame {
         d = new Donneur();
         jeuDeCartes = new PaquetDeCartes();
         
-        
-        mainDuDonneur=d.getMainDonneur();
-        mainDuJoueur=j.getMainJoueur();
         miseJoueur=j.getMise();
-        valeurMainDonneur=mainDuDonneur.getValeurMain();
-        valeurMainJoueur=mainDuJoueur.getValeurMain();
-       
-     
-    
+        valeurMainDonneur= d.main.getValeurMain();
+        valeurMainJoueur= j.main.getValeurMain();
+
         initComponents();
-          monDC=getGraphics();
+        monDC=getGraphics();
   
     }
 
@@ -118,9 +108,9 @@ public class Plateau extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(720, 540));
-        setMinimumSize(new java.awt.Dimension(720, 520));
-        setResizable(false);
+        setMaximumSize(null);
+        setName("Blackjack"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1280, 1024));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bouton5.setText("5");
@@ -165,11 +155,13 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(bouton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, -1, -1));
 
         jLabel2.setText("Valeur de la mise :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 100, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 140, 20));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blackjack/Cartes/imgPlateau.jpeg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/TapisDeCartesBJ.png"))); // NOI18N
+        jLabel3.setAutoscrolls(true);
         jLabel3.setFocusable(false);
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 540));
+        jLabel3.setName(""); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 1024));
 
         pack();
         setLocationRelativeTo(null);
@@ -196,17 +188,18 @@ public class Plateau extends javax.swing.JFrame {
 
     private void boutonTirerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonTirerMouseClicked
         // TODO add your handling code here:
+        
+        j.tirer(jeuDeCartes);
    
-            
-      //  monDC.drawString("titi est content", 200, 200);
+        //  monDC.drawString("titi est content", 200, 200);
         Image img = Toolkit.getDefaultToolkit().getImage("src/image/" + jeuDeCartes.recuperIdCarte(indice) + ".png");  
                
         monDC.drawImage(img, 200 + x*indice, 200 + y*indice, null);
-       Image img2 = Toolkit.getDefaultToolkit().getImage("src/image/" + jeuDeCartes.recuperIdCarte(indice+1) + ".png");  
+        Image img2 = Toolkit.getDefaultToolkit().getImage("src/image/" + jeuDeCartes.recuperIdCarte(indice+1) + ".png");  
         monDC.drawImage(img2, 200 + x*(indice+1), 200 + y*(indice+1), null);
-     valeurMise.setText(String.valueOf(jeuDeCartes.recuperIdCarte(indice)));
-     argent.setText(String.valueOf((indice)));
-     indice++;
+        valeurMise.setText(String.valueOf(jeuDeCartes.recuperIdCarte(indice)));
+        argent.setText(String.valueOf((indice)));
+        indice++;
         
     }//GEN-LAST:event_boutonTirerMouseClicked
 
