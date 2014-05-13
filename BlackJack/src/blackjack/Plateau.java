@@ -13,6 +13,7 @@ import java.awt.Graphics;
  * @author PC
  */
 public class Plateau extends javax.swing.JFrame {
+    
         //Attributs
     private final byte BLACKJACK = 21;
     private boolean victoire;
@@ -24,6 +25,7 @@ public class Plateau extends javax.swing.JFrame {
     Main mainDuJoueur;
     int valeurMainDonneur;
     int valeurMainJoueur;
+    int miseJoueur;
 
     /**
      * Creates new form Plateau
@@ -38,6 +40,7 @@ public class Plateau extends javax.swing.JFrame {
         mainDuJoueur=j.getMainJoueur();
         valeurMainDonneur=mainDuDonneur.getValeurMain();
         valeurMainJoueur=mainDuJoueur.getValeurMain();
+        
     
         initComponents();
     }
@@ -53,28 +56,21 @@ public class Plateau extends javax.swing.JFrame {
 
             victoire = false;
         }
-        
-          // victoire du donneur
+        // victoire du donneur
         // Si la valeur de la main du croupier > celle du joueur
         if(valeurMainJoueur< valeurMainDonneur){
         
-            
             victoire = false;
         }
-
          // victoire du donneur
         // Si la valeur de la main du croupier = celle du joueur
         if(valeurMainJoueur == valeurMainDonneur){
-        
-            
             victoire = false;
         }
-        
         // victoire du joueur
         // Si la valeur de la main du joueur > celle du croupier
         if(valeurMainJoueur > valeurMainDonneur){
         
-            
             victoire = true;
         }
     
@@ -94,6 +90,8 @@ public class Plateau extends javax.swing.JFrame {
 
         bouton5 = new javax.swing.JButton();
         boutonTirer = new javax.swing.JButton();
+        Rester = new javax.swing.JButton();
+        Doubler = new javax.swing.JButton();
         valeurMise = new javax.swing.JLabel();
         argent = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -102,9 +100,10 @@ public class Plateau extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(720, 520));
+        setMaximumSize(new java.awt.Dimension(720, 540));
         setMinimumSize(new java.awt.Dimension(720, 520));
-        setPreferredSize(new java.awt.Dimension(720, 520));
+        setPreferredSize(new java.awt.Dimension(720, 540));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bouton5.setText("5");
@@ -118,7 +117,7 @@ public class Plateau extends javax.swing.JFrame {
                 bouton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(bouton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, -1, -1));
+        getContentPane().add(bouton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, -1));
 
         boutonTirer.setText("Tirer");
         boutonTirer.setRolloverEnabled(false);
@@ -127,14 +126,18 @@ public class Plateau extends javax.swing.JFrame {
                 boutonTirerActionPerformed(evt);
             }
         });
-        getContentPane().add(boutonTirer, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, -1, -1));
-        getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, 60, 14));
+        getContentPane().add(boutonTirer, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
 
-        argent.setText("1000");
-        getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
+        Rester.setText("Rester");
+        getContentPane().add(Rester, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, -1, -1));
 
-        jLabel1.setText("Argent totale : ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, -1, -1));
+        Doubler.setText("Doubler");
+        getContentPane().add(Doubler, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, -1, -1));
+        getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 60, 20));
+        getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 470, 50, 20));
+
+        jLabel1.setText("Argent total : ");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
 
         bouton10.setText("10");
         bouton10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -142,10 +145,10 @@ public class Plateau extends javax.swing.JFrame {
                 bouton10MouseClicked(evt);
             }
         });
-        getContentPane().add(bouton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, -1, -1));
+        getContentPane().add(bouton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, -1, -1));
 
         jLabel2.setText("Valeur de la mise :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blackjack/Cartes/imgPlateau.jpeg"))); // NOI18N
         jLabel3.setFocusable(false);
@@ -158,7 +161,7 @@ public class Plateau extends javax.swing.JFrame {
     
     
     private void bouton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bouton10MouseClicked
-        // TODO add your handling code here:
+       
 //        Joueur.mise = Joueur.mise + 10;
 //        Joueur.argentTotal = Joueur.argentTotal - 10;
 //
@@ -167,7 +170,7 @@ public class Plateau extends javax.swing.JFrame {
     }//GEN-LAST:event_bouton10MouseClicked
 
     private void bouton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bouton5MouseClicked
-        // TODO add your handling code here:
+       
 //        Joueur.mise = Joueur.mise + 5;
 //        Joueur.argentTotal = Joueur.argentTotal - 5;
 //        valeurMise.setText(String.valueOf(Joueur.mise));
@@ -222,6 +225,8 @@ public class Plateau extends javax.swing.JFrame {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Doubler;
+    private javax.swing.JButton Rester;
     private javax.swing.JLabel argent;
     private javax.swing.JButton bouton10;
     private javax.swing.JButton bouton5;
