@@ -55,7 +55,7 @@ public class PaquetDeCartes {
      * @param pcarte
      */
     public PaquetDeCartes(PaquetDeCartes pcarte) {
-        this.nbCarte = pcarte.nbCarte;
+        nbCarte = pcarte.nbCarte;
     }
 
     //Methodes
@@ -122,17 +122,9 @@ public class PaquetDeCartes {
 
     }
 
-    public Carte[] getPaquet() {
-        return paquet;
-    }
-
     public String recuperIdCarte(int indice) {
-
         String id;
-
         id = paquet[indice].getIdCarte();
-
         return id;
-
     }
 }
