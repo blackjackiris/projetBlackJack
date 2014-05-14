@@ -100,7 +100,7 @@ public class PaquetDeCartes {
         byte indice;
 
         //Déplacement de toutes les cartes d'une position en arrière
-        for (indice = 0; indice < paquet.length; indice++) {
+        for (indice = 0; indice < paquet.length - 1; indice++) {
             paquet[indice] = paquet[indice + 1];
         }
 

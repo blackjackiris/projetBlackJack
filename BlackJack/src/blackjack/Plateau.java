@@ -28,7 +28,8 @@ public class Plateau extends javax.swing.JFrame {
     private byte valeurMainJoueur;
     private int miseJoueur;
     private int indice = 0;
-    private int y,x = 50;
+    private int x = 50;
+    private int y = 50;
     
 
     /**
@@ -45,7 +46,7 @@ public class Plateau extends javax.swing.JFrame {
         valeurMainJoueur= j.main.getValeurMain();
 
         initComponents();
-        monDC=getGraphics();
+
   
     }
 
@@ -188,18 +189,24 @@ public class Plateau extends javax.swing.JFrame {
     private void boutonTirerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonTirerMouseClicked
         // TODO add your handling code here:
         
-        j.tirer(jeuDeCartes);
+                monDC=getGraphics();
+        
+       j.tirer(jeuDeCartes);
    
         //  monDC.drawString("titi est content", 200, 200);
         Image img1 = Toolkit.getDefaultToolkit().getImage("src/image/" + jeuDeCartes.getIdCarteDansPaquet(indice) + ".png");  
         monDC.drawImage(img1, 200 + x*indice, 200 + y*indice, null);
         
+        
         Image img2 = Toolkit.getDefaultToolkit().getImage("src/image/" + jeuDeCartes.getIdCarteDansPaquet(indice + 1) + ".png");  
         monDC.drawImage(img2, 200 + x*(indice+1), 200 + y*(indice+1), null);
         
+           Image img3 = Toolkit.getDefaultToolkit().getImage("src/image/" + jeuDeCartes.getIdCarteDansPaquet(indice + 2) + ".png");  
+        monDC.drawImage(img3, 200 + x*(indice+2), 200 + y*(indice+2), null);
+        
         valeurMise.setText(String.valueOf(jeuDeCartes.getIdCarteDansPaquet(indice)));
         argent.setText(String.valueOf((indice)));
-        indice++;
+       
         
     }//GEN-LAST:event_boutonTirerMouseClicked
 
