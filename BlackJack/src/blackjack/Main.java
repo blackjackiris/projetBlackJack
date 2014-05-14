@@ -59,6 +59,10 @@ public class Main {
         return valMain;
     }
     
+    public byte getIndiceMain(){
+        return indiceMain;
+    }
+    
     /**
      * 
      * @param nouvelleCarte 

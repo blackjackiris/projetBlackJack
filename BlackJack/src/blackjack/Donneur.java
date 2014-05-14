@@ -6,9 +6,6 @@ package blackjack;
 
 
 public class Donneur extends Personne{
-
-    //Constructeurs
-    
     
     /**
      * Constructeurs par default

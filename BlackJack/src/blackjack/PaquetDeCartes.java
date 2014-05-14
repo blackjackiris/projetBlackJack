@@ -122,7 +122,7 @@ public class PaquetDeCartes {
 
     }
 
-    public String recuperIdCarte(int indice) {
+    public String getIdCarteDansPaquet(int indice) {
         String id;
         id = paquet[indice].getIdCarte();
         return id;

@@ -98,8 +98,8 @@ public class Plateau extends javax.swing.JFrame {
 
         bouton5 = new javax.swing.JButton();
         boutonTirer = new javax.swing.JButton();
-        Rester = new javax.swing.JButton();
-        Doubler = new javax.swing.JButton();
+        boutonRester = new javax.swing.JButton();
+        bouttonDoubler = new javax.swing.JButton();
         valeurMise = new javax.swing.JLabel();
         argent = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -110,7 +110,6 @@ public class Plateau extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(null);
         setName("Blackjack"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1280, 1024));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bouton5.setText("5");
@@ -135,11 +134,11 @@ public class Plateau extends javax.swing.JFrame {
         });
         getContentPane().add(boutonTirer, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
 
-        Rester.setText("Rester");
-        getContentPane().add(Rester, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, -1, -1));
+        boutonRester.setText("Rester");
+        getContentPane().add(boutonRester, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, -1, -1));
 
-        Doubler.setText("Doubler");
-        getContentPane().add(Doubler, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, -1, -1));
+        bouttonDoubler.setText("Doubler");
+        getContentPane().add(bouttonDoubler, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, -1, -1));
         getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 50, 20));
         getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 470, 50, 20));
 
@@ -192,12 +191,13 @@ public class Plateau extends javax.swing.JFrame {
         j.tirer(jeuDeCartes);
    
         //  monDC.drawString("titi est content", 200, 200);
-        Image img = Toolkit.getDefaultToolkit().getImage("src/image/" + jeuDeCartes.recuperIdCarte(indice) + ".png");  
-               
-        monDC.drawImage(img, 200 + x*indice, 200 + y*indice, null);
-        Image img2 = Toolkit.getDefaultToolkit().getImage("src/image/" + jeuDeCartes.recuperIdCarte(indice+1) + ".png");  
+        Image img1 = Toolkit.getDefaultToolkit().getImage("src/image/" + jeuDeCartes.getIdCarteDansPaquet(indice) + ".png");  
+        monDC.drawImage(img1, 200 + x*indice, 200 + y*indice, null);
+        
+        Image img2 = Toolkit.getDefaultToolkit().getImage("src/image/" + jeuDeCartes.getIdCarteDansPaquet(indice + 1) + ".png");  
         monDC.drawImage(img2, 200 + x*(indice+1), 200 + y*(indice+1), null);
-        valeurMise.setText(String.valueOf(jeuDeCartes.recuperIdCarte(indice)));
+        
+        valeurMise.setText(String.valueOf(jeuDeCartes.getIdCarteDansPaquet(indice)));
         argent.setText(String.valueOf((indice)));
         indice++;
         
@@ -237,16 +237,20 @@ public class Plateau extends javax.swing.JFrame {
                 new Plateau().setVisible(true);
             }
         });
+        
+        //Début de la partie
+        
+        
     }
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Doubler;
-    private javax.swing.JButton Rester;
     private javax.swing.JLabel argent;
     private javax.swing.JButton bouton10;
     private javax.swing.JButton bouton5;
+    private javax.swing.JButton boutonRester;
     private javax.swing.JButton boutonTirer;
+    private javax.swing.JButton bouttonDoubler;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
