@@ -12,7 +12,7 @@ public class Main {
     //Attributs
     private byte valeurMain;
     private byte nbCarteMain;
-    private byte indiceMain;
+    private int indiceMain;
     private int miseAttribuee;
     private Carte [] main;
     
@@ -25,13 +25,14 @@ public class Main {
         nbCarteMain = 0;
         indiceMain = 0;
         miseAttribuee = 0;
-        main = new Carte[10];
+        main = new Carte[9];
     }
     
     /**
      * Constructeurs
      * @param valeurMain
      * @param nbCarteMain
+     * @param miseAttribuee
      */
     public Main(byte valeurMain, byte nbCarteMain, int miseAttribuee) {
         this.valeurMain = valeurMain;
@@ -59,7 +60,7 @@ public class Main {
         return valMain;
     }
     
-    public byte getIndiceMain(){
+    public int getIndiceMain(){
         return indiceMain;
     }
     
@@ -78,6 +79,14 @@ public class Main {
         main[indiceMain] = new Carte();
         indiceMain --;
         return stkg;
+    }
+    
+       public String getIdCarteMain() {
+           
+         
+        String idCarte;
+        idCarte = main[indiceMain-1].getIdCarte();
+        return idCarte;
     }
 }
 
