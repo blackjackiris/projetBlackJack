@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import sun.security.krb5.Config;
 
 /**
  *
@@ -54,6 +55,8 @@ public class Plateau extends javax.swing.JFrame {
         Graphics monDC;
         monDC = getGraphics();
           argent.setText(String.valueOf((j.getArgentTotal())));
+          
+          boutonNewPartie.setVisible(false);
 
     }
 
@@ -62,6 +65,12 @@ public class Plateau extends javax.swing.JFrame {
      */
     public void victoire() {
 
+        // calcule la valeur de la main du joueur
+                valeurMainJoueur = j.main.getValeurMain();
+        
+            // calcule la valeur de la main du donneur
+        valeurMainDonneur = d.main.getValeurMain();
+        
 // Si la valeur de la MainJoueur est > à celle de la MainDonneur alors le joueur gagne
         if (valeurMainJoueur > valeurMainDonneur) {
             victoire = true;
@@ -76,6 +85,10 @@ public class Plateau extends javax.swing.JFrame {
 
         // affichage du résultat à l'écran
         if (victoire == true) {
+                 
+           
+               jLabel3.repaint();
+               
             messVictoire.setText("VOUS AVEZ GAGNE !");
           miseJoueur = miseJoueur * 2;
           j.argentGagne(miseJoueur);
@@ -83,16 +96,34 @@ public class Plateau extends javax.swing.JFrame {
            valeurMise.setText("0");
            argent.setText(String.valueOf((j.getArgentTotal())));
            
+               boutonTirer.setEnabled(false);
+             boutonRester.setEnabled(false);
+               bouttonDoubler.setEnabled(false);
+           
+            boutonNewPartie.setVisible(true);
+               boutonNewPartie.setEnabled(true);
           
             
         } else {
+         
+             
+               jLabel3.repaint();
+            
+                  boutonTirer.setEnabled(false);
+             boutonRester.setEnabled(false);
+               bouttonDoubler.setEnabled(false);
+               
+              boutonNewPartie.setVisible(true);
+                  boutonNewPartie.setEnabled(true);
             messVictoire.setText("VOUS AVEZ PERDU !");
+            
+             miseJoueur = 0;
+           valeurMise.setText("0");
+           argent.setText(String.valueOf((j.getArgentTotal())));
+             
         }
 
-        
-        
-        
-        
+   
     }
 
     public PaquetDeCartes getPaquet() {
@@ -136,6 +167,7 @@ public class Plateau extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        boutonNewPartie = new javax.swing.JButton();
         boutonMiser = new javax.swing.JButton();
         bouton100 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -158,6 +190,14 @@ public class Plateau extends javax.swing.JFrame {
         setMaximumSize(null);
         setName("Blackjack"); // NOI18N
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        boutonNewPartie.setText("Rejouer");
+        boutonNewPartie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonNewPartieActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boutonNewPartie, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 970, -1, -1));
 
         boutonMiser.setText("Miser");
         boutonMiser.addActionListener(new java.awt.event.ActionListener() {
@@ -276,18 +316,26 @@ public class Plateau extends javax.swing.JFrame {
         Image img = getImage(nomCarte);
         monDC.drawImage(img, 550 + x * (indice + 1), 410, null);
 
-        // calcule la valeur de la main du joueur
-        valeurMainJoueur = j.main.getValeurMain();
-        valMain.setText(String.valueOf((valeurMainJoueur)));
+     
+
+        valMain.setText(String.valueOf((j.main.getValeurMain())));
 
        
  
         indice++;
-        if (valeurMainJoueur > 21) {
+        if (j.main.getValeurMain() > 21) {
+            boutonNewPartie.setVisible(true);
+               boutonNewPartie.setEnabled(true);
+            
             messVictoire.setText("VOUS AVEZ PERDU !");
-             victoire = false;
+            
+            boutonTirer.setEnabled(false);
+             boutonRester.setEnabled(false);
+               bouttonDoubler.setEnabled(false);
+            
         }
-
+        
+    
 
     }//GEN-LAST:event_boutonTirerActionPerformed
 
@@ -308,16 +356,28 @@ public class Plateau extends javax.swing.JFrame {
 
         } while (d.main.getValeurMain() < 17);
 
-        // calcule la valeur de la main du donneur
-        valeurMainDonneur = d.main.getValeurMain();
-        valMainD.setText(String.valueOf((valeurMainDonneur)));
+    
+        valMainD.setText(String.valueOf((d.main.getValeurMain())));
 
-        if (valeurMainDonneur > 21) {
+        if (d.main.getValeurMain() > 21) {
+            
+       
+            
+             boutonTirer.setEnabled(false);
+             boutonRester.setEnabled(false);
+               bouttonDoubler.setEnabled(false);
+               
+           boutonNewPartie.setVisible(true);
+             boutonNewPartie.setEnabled(true);
+             
             messVictoire.setText("VOUS AVEZ GAGNE !");
-             victoire = true;
+           
+        }
+        else{  
+            victoire();
         }
 
-        victoire();
+      
     }//GEN-LAST:event_boutonResterActionPerformed
 
     private void bouton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton100ActionPerformed
@@ -335,6 +395,12 @@ public class Plateau extends javax.swing.JFrame {
         j.miser(miseJoueur);
         argent.setText(String.valueOf((j.getArgentTotal())));
     }//GEN-LAST:event_boutonMiserActionPerformed
+
+    private void boutonNewPartieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonNewPartieActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_boutonNewPartieActionPerformed
 
     /**
      * @param args the command line arguments
@@ -382,6 +448,7 @@ public class Plateau extends javax.swing.JFrame {
     private javax.swing.JButton bouton100;
     private javax.swing.JButton bouton5;
     private javax.swing.JButton boutonMiser;
+    private javax.swing.JButton boutonNewPartie;
     private javax.swing.JButton boutonRester;
     private javax.swing.JButton boutonTirer;
     private javax.swing.JButton bouttonDoubler;
