@@ -48,10 +48,12 @@ public class Plateau extends javax.swing.JFrame {
         miseJoueur = j.getMise();
         valeurMainDonneur = d.main.getValeurMain();
         valeurMainJoueur = j.main.getValeurMain();
+       
 
         initComponents();
         Graphics monDC;
         monDC = getGraphics();
+          argent.setText(String.valueOf((j.getArgentTotal())));
 
     }
 
@@ -74,11 +76,23 @@ public class Plateau extends javax.swing.JFrame {
 
         // affichage du résultat à l'écran
         if (victoire == true) {
-            messVictoire.setText("VOUS AVEZ GAGNER !");
+            messVictoire.setText("VOUS AVEZ GAGNE !");
+          miseJoueur = miseJoueur * 2;
+          j.argentGagne(miseJoueur);
+          miseJoueur = 0;
+           valeurMise.setText("0");
+           argent.setText(String.valueOf((j.getArgentTotal())));
+           
+          
+            
         } else {
             messVictoire.setText("VOUS AVEZ PERDU !");
         }
 
+        
+        
+        
+        
     }
 
     public PaquetDeCartes getPaquet() {
@@ -122,6 +136,8 @@ public class Plateau extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        boutonMiser = new javax.swing.JButton();
+        bouton100 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         valMainD = new javax.swing.JLabel();
         messVictoire = new javax.swing.JLabel();
@@ -142,6 +158,22 @@ public class Plateau extends javax.swing.JFrame {
         setMaximumSize(null);
         setName("Blackjack"); // NOI18N
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        boutonMiser.setText("Miser");
+        boutonMiser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonMiserActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boutonMiser, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 940, -1, -1));
+
+        bouton100.setText("100");
+        bouton100.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bouton100ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bouton100, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 890, -1, -1));
 
         jLabel5.setText("Valeur de la main ");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
@@ -165,7 +197,7 @@ public class Plateau extends javax.swing.JFrame {
                 bouton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(bouton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, -1));
+        getContentPane().add(bouton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 890, -1, -1));
 
         boutonTirer.setText("Tirer");
         boutonTirer.setRolloverEnabled(false);
@@ -174,7 +206,7 @@ public class Plateau extends javax.swing.JFrame {
                 boutonTirerActionPerformed(evt);
             }
         });
-        getContentPane().add(boutonTirer, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
+        getContentPane().add(boutonTirer, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 910, -1, -1));
 
         boutonRester.setText("Rester");
         boutonRester.addActionListener(new java.awt.event.ActionListener() {
@@ -182,15 +214,15 @@ public class Plateau extends javax.swing.JFrame {
                 boutonResterActionPerformed(evt);
             }
         });
-        getContentPane().add(boutonRester, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, -1, -1));
+        getContentPane().add(boutonRester, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 910, -1, -1));
 
         bouttonDoubler.setText("Doubler");
-        getContentPane().add(bouttonDoubler, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, -1, -1));
-        getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 50, 20));
-        getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 470, 50, 20));
+        getContentPane().add(bouttonDoubler, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 910, -1, -1));
+        getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 900, 50, 20));
+        getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 870, 50, 20));
 
         jLabel1.setText("Argent total : ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 880, -1, -1));
 
         bouton10.setText("10");
         bouton10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -198,10 +230,10 @@ public class Plateau extends javax.swing.JFrame {
                 bouton10MouseClicked(evt);
             }
         });
-        getContentPane().add(bouton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, -1, -1));
+        getContentPane().add(bouton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 890, -1, -1));
 
         jLabel2.setText("Valeur de la mise :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 140, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 900, 140, 20));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blackjack/image/TapisDeCartesBJ.png"))); // NOI18N
         jLabel3.setAutoscrolls(true);
@@ -248,11 +280,12 @@ public class Plateau extends javax.swing.JFrame {
         valeurMainJoueur = j.main.getValeurMain();
         valMain.setText(String.valueOf((valeurMainJoueur)));
 
-        valeurMise.setText(String.valueOf(jeuDeCartes.getIdCarteDansPaquet(indice)));
-        argent.setText(String.valueOf((indice)));
+       
+ 
         indice++;
         if (valeurMainJoueur > 21) {
             messVictoire.setText("VOUS AVEZ PERDU !");
+             victoire = false;
         }
 
 
@@ -280,11 +313,28 @@ public class Plateau extends javax.swing.JFrame {
         valMainD.setText(String.valueOf((valeurMainDonneur)));
 
         if (valeurMainDonneur > 21) {
-            messVictoire.setText("VOUS AVEZ GAGNER !");
+            messVictoire.setText("VOUS AVEZ GAGNE !");
+             victoire = true;
         }
 
         victoire();
     }//GEN-LAST:event_boutonResterActionPerformed
+
+    private void bouton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton100ActionPerformed
+        // TODO add your handling code here:
+        
+           miseJoueur = miseJoueur + 100;
+        valeurMise.setText(String.valueOf(miseJoueur));
+        
+    }//GEN-LAST:event_bouton100ActionPerformed
+
+    private void boutonMiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonMiserActionPerformed
+        // TODO add your handling code here:
+        
+     
+        j.miser(miseJoueur);
+        argent.setText(String.valueOf((j.getArgentTotal())));
+    }//GEN-LAST:event_boutonMiserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,6 +368,7 @@ public class Plateau extends javax.swing.JFrame {
             @Override
             public void run() {
                 new Plateau().setVisible(true);
+               
             }
         });
 
@@ -328,7 +379,9 @@ public class Plateau extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel argent;
     private javax.swing.JButton bouton10;
+    private javax.swing.JButton bouton100;
     private javax.swing.JButton bouton5;
+    private javax.swing.JButton boutonMiser;
     private javax.swing.JButton boutonRester;
     private javax.swing.JButton boutonTirer;
     private javax.swing.JButton bouttonDoubler;

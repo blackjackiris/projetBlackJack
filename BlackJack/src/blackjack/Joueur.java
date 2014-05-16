@@ -74,8 +74,15 @@ public class Joueur extends Personne{
         indiceMainSup = 0;
     }
     
-    public void miser() {
-        argentTotal = argentTotal - mise;
+    public void miser(int miseJ) {
+        argentTotal = argentTotal - miseJ;
+  
+    }
+    
+    public void argentGagne(int argent){
+    
+        argentTotal = argentTotal + argent;
+    
     }
 
     /**
