@@ -55,8 +55,8 @@ public class Plateau extends javax.swing.JFrame {
         Graphics monDC;
         monDC = getGraphics();
           argent.setText(String.valueOf((j.getArgentTotal())));
-          
-          boutonNewPartie.setVisible(false);
+            boutonNewPartie.setEnabled(false);
+       
 
     }
 
@@ -86,8 +86,7 @@ public class Plateau extends javax.swing.JFrame {
         // affichage du résultat à l'écran
         if (victoire == true) {
                  
-           
-               jLabel3.repaint();
+        
                
             messVictoire.setText("VOUS AVEZ GAGNE !");
           miseJoueur = miseJoueur * 2;
@@ -100,20 +99,20 @@ public class Plateau extends javax.swing.JFrame {
              boutonRester.setEnabled(false);
                bouttonDoubler.setEnabled(false);
            
-            boutonNewPartie.setVisible(true);
+        
                boutonNewPartie.setEnabled(true);
           
             
         } else {
          
              
-               jLabel3.repaint();
+              
             
                   boutonTirer.setEnabled(false);
              boutonRester.setEnabled(false);
                bouttonDoubler.setEnabled(false);
                
-              boutonNewPartie.setVisible(true);
+          
                   boutonNewPartie.setEnabled(true);
             messVictoire.setText("VOUS AVEZ PERDU !");
             
@@ -399,7 +398,7 @@ public class Plateau extends javax.swing.JFrame {
     private void boutonNewPartieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonNewPartieActionPerformed
         // TODO add your handling code here:
         
-        
+         jLabel3.repaint();
     }//GEN-LAST:event_boutonNewPartieActionPerformed
 
     /**
