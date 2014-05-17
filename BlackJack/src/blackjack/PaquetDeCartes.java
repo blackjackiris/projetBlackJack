@@ -107,6 +107,8 @@ public class PaquetDeCartes {
         nbCarte--;
         return carteTiree;
     }
+    
+
 
     /**
      *

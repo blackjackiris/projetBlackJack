@@ -48,7 +48,7 @@ public class Main {
      * Méthode pour calculer la valeur de la main entière
      * @return valMain
      */
-    public byte getValeurMain(){
+    public int getValeurMain(){
 
         byte cpt;
         byte valMain = 0;
@@ -87,6 +87,20 @@ public class Main {
         String idCarte;
         idCarte = main[indiceMain-1].getIdCarte();
         return idCarte;
+    }
+       
+           
+    public void viderMain() {
+
+        int cpt;
+        
+         for(cpt=0; cpt<nbCarteMain; cpt++){
+          main[cpt] = null;
+          indiceMain = 0;
+          valeurMain = 0;
+          nbCarteMain = 0;
+        }
+       
     }
 }
 
