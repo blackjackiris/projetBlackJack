@@ -97,6 +97,7 @@ public class Joueur extends Personne{
 
     /**
      * Permet au joueur de doubler ca mise lors de sa main de base mais le fait piocher une carte
+     * @param paquet
      */
     public void doubler(PaquetDeCartes paquet) {
         mise *= 2;
