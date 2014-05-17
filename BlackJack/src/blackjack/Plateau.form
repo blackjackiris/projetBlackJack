@@ -108,7 +108,7 @@
     <Component class="javax.swing.JLabel" name="valMainD">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="240" y="280" width="-1" height="-1"/>
+          <AbsoluteConstraints x="230" y="270" width="40" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -141,6 +141,19 @@
         </Constraint>
       </Constraints>
     </Component>
+    <Component class="javax.swing.JButton" name="boutonDebutPartie">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Commencer"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonDebutPartieActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="730" y="970" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
     <Component class="javax.swing.JButton" name="boutonTirer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tirer"/>
@@ -168,7 +181,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="bouttonDoubler">
+    <Component class="javax.swing.JButton" name="boutonDoubler">
       <Properties>
         <Property name="text" type="java.lang.String" value="Doubler"/>
       </Properties>
@@ -178,12 +191,12 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="bouttonPartager">
+    <Component class="javax.swing.JButton" name="boutonPartager">
       <Properties>
         <Property name="text" type="java.lang.String" value="Partager"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bouttonPartagerActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonPartagerActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -191,7 +204,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="bouttonAssurance">
+    <Component class="javax.swing.JButton" name="boutonAssurance">
       <Properties>
         <Property name="text" type="java.lang.String" value="Assurance"/>
       </Properties>
