@@ -33,6 +33,9 @@ public class Plateau extends javax.swing.JFrame {
     private int valeurMainJoueur;
     private int miseJoueur;
     private int indice;
+    private boolean choixAssurance;
+    private final int DECALAGEGAUCHE = 16;
+    private final int DECALAGEBAS = 32;
     private final int x = 16;
     private final int y = 50;
 
@@ -44,6 +47,7 @@ public class Plateau extends javax.swing.JFrame {
         j = new Joueur();
         d = new Donneur();
         jeuDeCartes = new PaquetDeCartes();
+        choixAssurance = false;
 
         miseJoueur = j.getMise();
         valeurMainDonneur = d.main.getValeurMain();
@@ -68,15 +72,12 @@ public class Plateau extends javax.swing.JFrame {
         // calcule la valeur de la main du donneur
         valeurMainDonneur = d.main.getValeurMain();
 
-// Si la valeur de la MainJoueur est > à celle de la MainDonneur alors le joueur gagne
-        if (valeurMainJoueur > valeurMainDonneur) {
+        // Si la valeur de la MainJoueur est > à celle de la MainDonneur sans dépasser 21 ou si la valeur de la MainDonneur dépasse 21, alors le joueur gagne
+        if((valeurMainJoueur > valeurMainDonneur && valeurMainJoueur <= BLACKJACK) || valeurMainDonneur > BLACKJACK) {
             victoire = true;
         }
         // Sinon le joueur perd         
-        if (valeurMainJoueur == valeurMainDonneur) {
-            victoire = false;
-        }
-        if (valeurMainJoueur < valeurMainDonneur) {
+        else{
             victoire = false;
         }
 
@@ -110,11 +111,43 @@ public class Plateau extends javax.swing.JFrame {
             argent.setText(String.valueOf((j.getArgentTotal())));
 
         }
-
     }
-
-    public PaquetDeCartes getPaquet() {
-        return jeuDeCartes;
+    
+    //Méthode permettant d'afficher/éffacer les bouttons en fonction des cartes/valeurs
+    public void switchEtatBouttons(){
+        
+        Carte carte1, carte2;
+        int val;
+        
+        //Affiche ou efface le boutton Assurance
+        carte1 = d.main.getCarteDansMain(0);
+        
+        if(carte1.getValeur() == 1 && choixAssurance == false){
+            bouttonAssurance.setEnabled(true);
+        }
+        else{
+            bouttonAssurance.setEnabled(false);
+        }
+        
+        //Affiche ou efface le boutton Doubler
+        carte1 = j.main.getCarteDansMain(0);
+        carte2 = j.main.getCarteDansMain(1);
+        val = carte1.getValeur() + carte2.getValeur();
+        
+        if(val >= 9 && val <= 11){
+            bouttonDoubler.setEnabled(true);
+        }
+        else{
+            bouttonDoubler.setEnabled(false);
+        }
+        
+        //Affiche ou efface le boutton Partager
+        if(carte1.getValeur() == carte2.getValeur()){
+            bouttonPartager.setEnabled(true);
+        }
+        else{
+            bouttonPartager.setEnabled(true);
+        }
     }
 
     /**
@@ -167,11 +200,13 @@ public class Plateau extends javax.swing.JFrame {
         boutonTirer = new javax.swing.JButton();
         boutonRester = new javax.swing.JButton();
         bouttonDoubler = new javax.swing.JButton();
+        bouttonPartager = new javax.swing.JButton();
+        bouttonAssurance = new javax.swing.JButton();
         valeurMise = new javax.swing.JLabel();
         argent = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(null);
@@ -249,20 +284,31 @@ public class Plateau extends javax.swing.JFrame {
 
         bouttonDoubler.setText("Doubler");
         getContentPane().add(bouttonDoubler, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 910, -1, -1));
+
+        bouttonPartager.setText("Partager");
+        bouttonPartager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bouttonPartagerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bouttonPartager, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 910, -1, -1));
+
+        bouttonAssurance.setText("Assurance");
+        getContentPane().add(bouttonAssurance, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 910, -1, -1));
         getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 900, 50, 20));
         getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 870, 50, 20));
 
         jLabel1.setText("Argent total : ");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 880, -1, -1));
 
-        jLabel2.setText("Valeur de la mise :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 900, 140, 20));
-
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blackjack/image/TapisDeCartesBJ.png"))); // NOI18N
         jLabel3.setAutoscrolls(true);
         jLabel3.setFocusable(false);
         jLabel3.setName(""); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 1024));
+
+        jLabel2.setText("Valeur de la mise :");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 900, 140, 20));
 
         pack();
         setLocationRelativeTo(null);
@@ -289,7 +335,7 @@ public class Plateau extends javax.swing.JFrame {
         // affiche les cartes de la main du joueur
         String nomCarte = "image/" + j.main.getIdCarteMain() + ".png";
         Image img = getImage(nomCarte);
-        monDC.drawImage(img, 550 + x * (indice + 1), 600, null);
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indice + 1), 600, null);
 
         valMain.setText(String.valueOf((j.main.getValeurMain())));
 
@@ -305,7 +351,8 @@ public class Plateau extends javax.swing.JFrame {
             bouttonDoubler.setEnabled(false);
 
         }
-
+        
+        switchEtatBouttons();
 
     }//GEN-LAST:event_boutonTirerActionPerformed
 
@@ -372,8 +419,6 @@ public class Plateau extends javax.swing.JFrame {
 
     private void boutonNewPartieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonNewPartieActionPerformed
 
-        
-      
         // vide la plateau
         jLabel3.repaint();
         
@@ -400,6 +445,8 @@ public class Plateau extends javax.swing.JFrame {
         boutonMiser.setEnabled(true);
         
         indice = 0;
+        
+        switchEtatBouttons();
 
     }//GEN-LAST:event_boutonNewPartieActionPerformed
 
@@ -410,6 +457,12 @@ public class Plateau extends javax.swing.JFrame {
         valeurMise.setText(String.valueOf(miseJoueur));
 
     }//GEN-LAST:event_bouton10ActionPerformed
+
+    private void bouttonPartagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouttonPartagerActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_bouttonPartagerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -460,7 +513,9 @@ public class Plateau extends javax.swing.JFrame {
     private javax.swing.JButton boutonNewPartie;
     private javax.swing.JButton boutonRester;
     private javax.swing.JButton boutonTirer;
+    private javax.swing.JButton bouttonAssurance;
     private javax.swing.JButton bouttonDoubler;
+    private javax.swing.JButton bouttonPartager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
