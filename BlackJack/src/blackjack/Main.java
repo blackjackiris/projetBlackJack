@@ -85,9 +85,15 @@ public class Main {
         return stkg;
     }
     
-       public String getIdCarteMain() {
+    public String getIdCarteMain() {
         String idCarte;
-        idCarte = main[indiceMain-1].getIdCarte();
+        idCarte = main[indiceMain - 1].getIdCarte();
+        return idCarte;
+    }
+    
+    public String getIdSecondeCarte(){
+        String idCarte;
+        idCarte = main[1].getIdCarte();
         return idCarte;
     }
        
