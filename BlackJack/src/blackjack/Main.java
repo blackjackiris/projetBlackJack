@@ -64,6 +64,10 @@ public class Main {
         return indiceMain;
     }
     
+    public Carte getCarteDansMain(int indice){
+        return main[indice];
+    }
+    
     /**
      * 
      * @param nouvelleCarte 
@@ -82,8 +86,6 @@ public class Main {
     }
     
        public String getIdCarteMain() {
-           
-         
         String idCarte;
         idCarte = main[indiceMain-1].getIdCarte();
         return idCarte;
@@ -91,14 +93,14 @@ public class Main {
        
            
     public void viderMain() {
-
+        
         int cpt;
         
-         for(cpt=0; cpt<nbCarteMain; cpt++){
-          main[cpt] = null;
-          indiceMain = 0;
-          valeurMain = 0;
-          nbCarteMain = 0;
+        for(cpt=0;cpt<nbCarteMain; cpt++){
+            main[cpt] = null;
+            indiceMain = 0;
+            valeurMain = 0;
+            nbCarteMain = 0;
         }
        
     }
