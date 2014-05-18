@@ -396,13 +396,9 @@ public class Plateau extends javax.swing.JFrame {
         indiceJoueur++;
         if (j.main.valeurMainCarteCache() > 21) {
 
-            boutonNewPartie.setEnabled(true);
 
-            messVictoire.setText("VOUS AVEZ PERDU !");
-
-            boutonTirer.setEnabled(false);
-            boutonRester.setEnabled(false);
-            boutonDoubler.setEnabled(false);
+            
+            victoire();
 
         }
         
@@ -432,22 +428,12 @@ public class Plateau extends javax.swing.JFrame {
 
         valMainD.setText(String.valueOf((d.main.getValeurMain())));
            valMain.setText(String.valueOf((j.main.getValeurMain())));
+           
+           
 
-        if (d.main.getValeurMain() > 21) {
 
-            boutonTirer.setEnabled(false);
-            boutonRester.setEnabled(false);
-            boutonDoubler.setEnabled(false);
-
-      
-            boutonNewPartie.setEnabled(true);
-
-            messVictoire.setText("VOUS AVEZ GAGNE !");
-
-        } else {
-            victoire();
-        }
-
+ victoire();
+ 
 
     }//GEN-LAST:event_boutonResterActionPerformed
 
@@ -493,20 +479,21 @@ public class Plateau extends javax.swing.JFrame {
         d.main.viderMain();
         valMainD.setText(String.valueOf((d.main.getValeurMain())));
 
-        //Efface les boutons de jeu
+        //Désactive les boutons de jeu
         boutonTirer.setEnabled(false);
         boutonRester.setEnabled(false);
         boutonDoubler.setEnabled(false);
         boutonNewPartie.setEnabled(false);
 
-        //Affiche les boutons de mise
+        //Active les boutons de mise
         bouton10.setEnabled(true);
         bouton100.setEnabled(true);
         bouton5.setEnabled(true);
         boutonMiser.setEnabled(true);
         
-        //Affiche le bouton pour commencer la partie
-        boutonDebutPartie.setEnabled(true);
+           //Désactive le bouton jouer pour oblgier le joueur a miser
+        boutonDebutPartie.setEnabled(false);
+ 
 
     }//GEN-LAST:event_boutonNewPartieActionPerformed
 
