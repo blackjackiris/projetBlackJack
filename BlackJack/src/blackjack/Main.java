@@ -60,6 +60,16 @@ public class Main {
         return valMain;
     }
     
+    public int valeurMainCarteCache(){
+
+      
+        int valMain ;
+        
+       valMain =  getValeurMain();
+       valMain = valMain - main[1].getValeur(); 
+        return valMain;
+    }
+    
     public int getIndiceMain(){
         return indiceMain;
     }

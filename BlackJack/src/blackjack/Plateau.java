@@ -61,6 +61,11 @@ public class Plateau extends javax.swing.JFrame {
         monDC = getGraphics();
         argent.setText(String.valueOf((j.getArgentTotal())));
         boutonNewPartie.setEnabled(false);
+         boutonTirer.setEnabled(false);
+        boutonRester.setEnabled(false);
+        boutonDoubler.setEnabled(false);
+        boutonAssurance.setEnabled(false);
+        boutonPartager.setEnabled(false);
 
     }
 
@@ -161,10 +166,28 @@ public class Plateau extends javax.swing.JFrame {
         Graphics monDC;
         monDC = getGraphics();
         
-        String id = d.main.getIdSecondeCarte();
+        String id = "image/" + d.main.getIdSecondeCarte() + ".png";
         img = getImage(id);
         monDC.drawImage(img, 582, 250, null);
         valMainD.setText(String.valueOf((d.main.getValeurMain())));
+        
+    
+    }
+    
+        /**
+     * Méthode pour retourné la carte face cachée du Joueur
+     */
+    public void retournerSecondeCarteJoueur(){
+        Image img;
+        Graphics monDC;
+        monDC = getGraphics();
+        
+        String id = "image/" + j.main.getIdSecondeCarte() + ".png";
+        img = getImage(id);
+        monDC.drawImage(img, 582, 600, null);
+        valMainD.setText(String.valueOf((j.main.getValeurMain())));
+        
+    
     }
 
     /**
@@ -221,10 +244,10 @@ public class Plateau extends javax.swing.JFrame {
         boutonPartager = new javax.swing.JButton();
         boutonAssurance = new javax.swing.JButton();
         valeurMise = new javax.swing.JLabel();
+        texteValeurMise = new javax.swing.JLabel();
         argent = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        textteArgenttotale = new javax.swing.JLabel();
+        Plateau = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(null);
@@ -274,14 +297,14 @@ public class Plateau extends javax.swing.JFrame {
 
         jLabel5.setText("Valeur de la main ");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
-        getContentPane().add(valMainD, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 40, 30));
+        getContentPane().add(valMainD, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 40, 30));
 
         messVictoire.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         getContentPane().add(messVictoire, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 860, 340, 140));
 
         jLabel4.setText("Valeur de la main");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 610, -1, -1));
-        getContentPane().add(valMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 70, 50));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 620, -1, -1));
+        getContentPane().add(valMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 610, 20, 20));
 
         boutonDebutPartie.setText("Commencer");
         boutonDebutPartie.addActionListener(new java.awt.event.ActionListener() {
@@ -322,19 +345,19 @@ public class Plateau extends javax.swing.JFrame {
         boutonAssurance.setText("Assurance");
         getContentPane().add(boutonAssurance, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 910, -1, -1));
         getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 900, 50, 20));
+
+        texteValeurMise.setText("Valeur de la mise :");
+        getContentPane().add(texteValeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 900, 140, 20));
         getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 870, 50, 20));
 
-        jLabel1.setText("Argent total : ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 880, -1, -1));
+        textteArgenttotale.setText("Argent total : ");
+        getContentPane().add(textteArgenttotale, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 880, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blackjack/image/TapisDeCartesBJ.png"))); // NOI18N
-        jLabel3.setAutoscrolls(true);
-        jLabel3.setFocusable(false);
-        jLabel3.setName(""); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 1024));
-
-        jLabel2.setText("Valeur de la mise :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 900, 140, 20));
+        Plateau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blackjack/image/TapisDeCartesBJ.png"))); // NOI18N
+        Plateau.setAutoscrolls(true);
+        Plateau.setFocusable(false);
+        Plateau.setName(""); // NOI18N
+        getContentPane().add(Plateau, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 1024));
 
         pack();
         setLocationRelativeTo(null);
@@ -363,10 +386,10 @@ public class Plateau extends javax.swing.JFrame {
         Image img = getImage(nomCarte);
         monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600, null);
 
-        valMain.setText(String.valueOf((j.main.getValeurMain())));
+        valMain.setText(String.valueOf((j.main.valeurMainCarteCache())));
 
         indiceJoueur++;
-        if (j.main.getValeurMain() > 21) {
+        if (j.main.valeurMainCarteCache() > 21) {
 
             boutonNewPartie.setEnabled(true);
 
@@ -388,6 +411,7 @@ public class Plateau extends javax.swing.JFrame {
         monDC = getGraphics();
         
         retournerSecondeCarteDonneur();
+        retournerSecondeCarteJoueur();
 
         while(d.main.getValeurMain() < 17){
             d.tirer(jeuDeCartes);
@@ -402,6 +426,7 @@ public class Plateau extends javax.swing.JFrame {
         }
 
         valMainD.setText(String.valueOf((d.main.getValeurMain())));
+           valMain.setText(String.valueOf((j.main.getValeurMain())));
 
         if (d.main.getValeurMain() > 21) {
 
@@ -448,7 +473,7 @@ public class Plateau extends javax.swing.JFrame {
     private void boutonNewPartieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonNewPartieActionPerformed
 
         // vide la plateau
-        jLabel3.repaint();
+        Plateau.repaint();
         
         messVictoire.setText("");
 
@@ -529,17 +554,18 @@ public class Plateau extends javax.swing.JFrame {
         
         //Le donneur tire une carte face cachée
         d.tirer(jeuDeCartes);
-        img = getImage("blank.png");
-        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 600, null);
+       String blank = "image/blank.png";
+        img = getImage(blank);
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 250, null);
         //Ici, l'affichage de la valeur de la main du donneur n'est pas mis à jour, pour garder la valeur de la carte face cachée secrete
         indiceDonneur ++;
         
-        //Le joueur tire une carte face visible
+        //Le joueur tire une carte face cachéé
         j.tirer(jeuDeCartes);
-        nomCarte = "image/" + j.main.getIdCarteMain() + ".png";
-        img = getImage(nomCarte);
+       
+         img = getImage(blank);
         monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600, null);
-        valMain.setText(String.valueOf((j.main.getValeurMain())));
+      //  valMain.setText(String.valueOf((j.main.getValeurMain())));
         indiceJoueur ++;
         
     }//GEN-LAST:event_boutonDebutPartieActionPerformed
@@ -585,6 +611,7 @@ public class Plateau extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Plateau;
     private javax.swing.JLabel argent;
     private javax.swing.JButton bouton10;
     private javax.swing.JButton bouton100;
@@ -597,12 +624,11 @@ public class Plateau extends javax.swing.JFrame {
     private javax.swing.JButton boutonPartager;
     private javax.swing.JButton boutonRester;
     private javax.swing.JButton boutonTirer;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel messVictoire;
+    private javax.swing.JLabel texteValeurMise;
+    private javax.swing.JLabel textteArgenttotale;
     private javax.swing.JLabel valMain;
     private javax.swing.JLabel valMainD;
     private javax.swing.JLabel valeurMise;
