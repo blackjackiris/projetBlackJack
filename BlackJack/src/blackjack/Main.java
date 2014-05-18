@@ -60,6 +60,10 @@ public class Main {
         return valMain;
     }
     
+    public byte getNbCarteMain(){
+        return nbCarteMain;
+    }
+    
     public int getIndiceMain(){
         return indiceMain;
     }
@@ -91,10 +95,14 @@ public class Main {
         return idCarte;
     }
     
-    public String getIdSecondeCarte(){
+    public String getIdCarteSelec(int nro){
         String idCarte;
-        idCarte = main[1].getIdCarte();
+        idCarte = main[nro].getIdCarte();
         return idCarte;
+    }
+    
+    public void setMiseAttribuee(int mise){
+        miseAttribuee = mise;
     }
        
            
