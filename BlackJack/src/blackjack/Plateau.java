@@ -591,6 +591,7 @@ public class Plateau extends javax.swing.JFrame {
         // Mise du joueur doublée
         miseJoueur = miseJoueur*2;
         valeurMise.setText(String.valueOf(miseJoueur));
+        j.tirer(jeuDeCartes);
         
         
     }//GEN-LAST:event_boutonDoublerActionPerformed
