@@ -61,6 +61,11 @@ public class Joueur extends Personne{
     public Main getMainJoueur() {
         return main;
     }
+    
+    public Main getMainJoueurSupp(byte nroMain){
+        nroMain --;
+        return mainMultiple[nroMain];
+    }
 
     public int getMise() {
         return mise;
@@ -74,15 +79,31 @@ public class Joueur extends Personne{
         indiceMainSup = 0;
     }
     
-    public void miser(int miseJ) {
+    public void miser(int miseJ, byte nroMain) {
         argentTotal = argentTotal - miseJ;
-  
+        if(nroMain == 0){
+            main.setMiseAttribuee(miseJ);
+        }
+        else{
+            mainMultiple[nroMain].setMiseAttribuee(miseJ);
+        }
     }
     
     public void argentGagne(int argent){
-    
         argentTotal = argentTotal + argent;
+    }
     
+    public void tirer(PaquetDeCartes paquet, byte nroMain){
+        
+        Carte stkg;
+        
+        if(nroMain == 0){
+            super.tirer(paquet);
+        }
+        else{
+            stkg = paquet.piocherCarte();
+            mainMultiple[nroMain - 1].ajouterCarte(stkg);
+        }
     }
 
     /**
@@ -98,10 +119,12 @@ public class Joueur extends Personne{
     /**
      * Permet au joueur de doubler ca mise lors de sa main de base mais le fait piocher une carte
      * @param paquet
+     * @param miseJ
+     * @param nroMain
      */
-    public void doubler(PaquetDeCartes paquet) {
-        mise *= 2;
-        tirer(paquet);
+    public void doubler(PaquetDeCartes paquet, byte nroMain, int miseJ){
+        miser(miseJ, nroMain);
+        tirer(paquet, nroMain);
     }
 
     /**
