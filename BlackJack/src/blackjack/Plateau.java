@@ -467,6 +467,7 @@ public class Plateau extends javax.swing.JFrame {
         bouton100.setEnabled(false);
         bouton5.setEnabled(false);
         boutonMiser.setEnabled(false);
+        bouton25.setEnabled(false);
         
         // atcive le bouton pour commencer a jouer
         boutonDebutPartie.setEnabled(true);
@@ -504,6 +505,7 @@ public class Plateau extends javax.swing.JFrame {
         bouton100.setEnabled(true);
         bouton5.setEnabled(true);
         boutonMiser.setEnabled(true);
+          bouton25.setEnabled(true);
         
            //Désactive le bouton jouer pour oblgier le joueur a miser
         boutonDebutPartie.setEnabled(false);
