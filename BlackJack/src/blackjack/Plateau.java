@@ -345,6 +345,11 @@ public class Plateau extends javax.swing.JFrame {
 
         boutonDoubler.setText("Doubler");
         boutonDoubler.setEnabled(false);
+        boutonDoubler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonDoublerActionPerformed(evt);
+            }
+        });
         getContentPane().add(boutonDoubler, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 910, -1, -1));
 
         boutonPartager.setText("Partager");
@@ -579,6 +584,16 @@ public class Plateau extends javax.swing.JFrame {
         miseJoueur = miseJoueur + 25;
         valeurMise.setText(String.valueOf(miseJoueur));
     }//GEN-LAST:event_bouton25ActionPerformed
+
+    private void boutonDoublerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonDoublerActionPerformed
+        // TODO add your handling code here:
+        
+        // Mise du joueur doublée
+        miseJoueur = miseJoueur*2;
+        valeurMise.setText(String.valueOf(miseJoueur));
+        
+        
+    }//GEN-LAST:event_boutonDoublerActionPerformed
 
     /**
      * @param args the command line arguments
