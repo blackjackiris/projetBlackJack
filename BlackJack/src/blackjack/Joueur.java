@@ -76,12 +76,20 @@ public class Joueur extends Personne{
     
     public void miser(int miseJ) {
         argentTotal = argentTotal - miseJ;
+        mise = miseJ;
   
     }
     
     public void argentGagne(int argent){
     
         argentTotal = argentTotal + argent;
+            mise = 0;
+    
+    }
+    
+       public void argentPerdu(){
+    
+        mise = 0;
     
     }
 
@@ -100,7 +108,8 @@ public class Joueur extends Personne{
      * @param paquet
      */
     public void doubler(PaquetDeCartes paquet) {
-        mise *= 2;
+        argentTotal = argentTotal - mise;
+        mise = mise * 2;
         tirer(paquet);
     }
 

@@ -33,6 +33,7 @@
     <Component class="javax.swing.JButton" name="boutonNewPartie">
       <Properties>
         <Property name="text" type="java.lang.String" value="Rejouer"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonNewPartieActionPerformed"/>
@@ -228,6 +229,7 @@
     <Component class="javax.swing.JButton" name="boutonAssurance">
       <Properties>
         <Property name="text" type="java.lang.String" value="Assurance"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

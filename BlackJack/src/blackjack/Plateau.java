@@ -60,12 +60,7 @@ public class Plateau extends javax.swing.JFrame {
         Graphics monDC;
         monDC = getGraphics();
         argent.setText(String.valueOf((j.getArgentTotal())));
-        boutonNewPartie.setEnabled(false);
-         boutonTirer.setEnabled(false);
-        boutonRester.setEnabled(false);
-        boutonDoubler.setEnabled(false);
-        boutonAssurance.setEnabled(false);
-        boutonPartager.setEnabled(false);
+    
 
     }
 
@@ -93,10 +88,10 @@ public class Plateau extends javax.swing.JFrame {
         if (victoire == true) {
 
             messVictoire.setText("VOUS AVEZ GAGNE !");
-            miseJoueur = miseJoueur * 2;
+            miseJoueur = j.getMise() * 2;
             j.argentGagne(miseJoueur);
             miseJoueur = 0;
-            valeurMise.setText("0");
+          
             argent.setText(String.valueOf((j.getArgentTotal())));
 
             boutonTirer.setEnabled(false);
@@ -113,9 +108,9 @@ public class Plateau extends javax.swing.JFrame {
 
             boutonNewPartie.setEnabled(true);
             messVictoire.setText("VOUS AVEZ PERDU !");
-
+            j.argentPerdu();
             miseJoueur = 0;
-            valeurMise.setText("0");
+        
             argent.setText(String.valueOf((j.getArgentTotal())));
 
         }
@@ -257,6 +252,7 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         boutonNewPartie.setText("Rejouer");
+        boutonNewPartie.setEnabled(false);
         boutonNewPartie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonNewPartieActionPerformed(evt);
@@ -362,6 +358,7 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(boutonPartager, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 910, -1, -1));
 
         boutonAssurance.setText("Assurance");
+        boutonAssurance.setEnabled(false);
         getContentPane().add(boutonAssurance, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 910, -1, -1));
         getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 900, 50, 20));
 
@@ -467,6 +464,7 @@ public class Plateau extends javax.swing.JFrame {
         bouton100.setEnabled(false);
         bouton5.setEnabled(false);
         boutonMiser.setEnabled(false);
+        bouton25.setEnabled(false);
         
         // atcive le bouton pour commencer a jouer
         boutonDebutPartie.setEnabled(true);
@@ -504,9 +502,12 @@ public class Plateau extends javax.swing.JFrame {
         bouton100.setEnabled(true);
         bouton5.setEnabled(true);
         boutonMiser.setEnabled(true);
+          bouton25.setEnabled(true);
         
            //Désactive le bouton jouer pour oblgier le joueur a miser
         boutonDebutPartie.setEnabled(false);
+        
+          valeurMise.setText("0");
  
 
     }//GEN-LAST:event_boutonNewPartieActionPerformed
@@ -587,11 +588,44 @@ public class Plateau extends javax.swing.JFrame {
 
     private void boutonDoublerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonDoublerActionPerformed
         // TODO add your handling code here:
+        String nomCarte;
+        Image img;
+        Graphics monDC;
+        monDC = getGraphics();
         
-        // Mise du joueur doublée
-        miseJoueur = miseJoueur*2;
-        valeurMise.setText(String.valueOf(miseJoueur));
+      j.doubler(jeuDeCartes);
+      
+      valeurMise.setText(String.valueOf((j.getMise())));
+       argent.setText(String.valueOf((j.getArgentTotal())));
+      
+          
+        //Le joueur tire une carte face visible
+        nomCarte = "image/" + j.main.getIdCarteMain() + ".png";
+        img = getImage(nomCarte);
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600, null);
         
+     // les cartes cachés se retournent   
+     retournerSecondeCarteJoueur();
+     retournerSecondeCarteDonneur();
+     
+        valMain.setText(String.valueOf((j.main.getValeurMain())));
+        indiceJoueur ++;
+        
+        // le donneur joue
+        while(d.main.getValeurMain() < 17){
+            d.tirer(jeuDeCartes);
+
+            // affiche les cartes de la main du Croupier
+            String nomCarte2 = "image/" + d.main.getIdCarteMain() + ".png";
+            Image img2 = getImage(nomCarte2);
+            monDC.drawImage(img2, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 250, null);
+
+            indiceDonneur++;
+
+        }
+        
+         valMainD.setText(String.valueOf((d.main.getValeurMain())));
+        victoire();
         
     }//GEN-LAST:event_boutonDoublerActionPerformed
 
