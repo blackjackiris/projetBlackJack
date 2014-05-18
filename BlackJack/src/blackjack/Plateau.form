@@ -120,7 +120,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="380" y="860" width="340" height="140"/>
+          <AbsoluteConstraints x="350" y="930" width="170" height="80"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -144,6 +144,7 @@
     <Component class="javax.swing.JButton" name="boutonDebutPartie">
       <Properties>
         <Property name="text" type="java.lang.String" value="Commencer"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonDebutPartieActionPerformed"/>
@@ -157,6 +158,7 @@
     <Component class="javax.swing.JButton" name="boutonTirer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tirer"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="rolloverEnabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -171,6 +173,7 @@
     <Component class="javax.swing.JButton" name="boutonRester">
       <Properties>
         <Property name="text" type="java.lang.String" value="Rester"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonResterActionPerformed"/>
@@ -184,6 +187,7 @@
     <Component class="javax.swing.JButton" name="boutonDoubler">
       <Properties>
         <Property name="text" type="java.lang.String" value="Doubler"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -194,6 +198,7 @@
     <Component class="javax.swing.JButton" name="boutonPartager">
       <Properties>
         <Property name="text" type="java.lang.String" value="Partager"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonPartagerActionPerformed"/>

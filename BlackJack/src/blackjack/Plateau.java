@@ -300,13 +300,14 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(valMainD, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 40, 30));
 
         messVictoire.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        getContentPane().add(messVictoire, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 860, 340, 140));
+        getContentPane().add(messVictoire, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 930, 170, 80));
 
         jLabel4.setText("Valeur de la main");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 620, -1, -1));
         getContentPane().add(valMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 610, 20, 20));
 
         boutonDebutPartie.setText("Commencer");
+        boutonDebutPartie.setEnabled(false);
         boutonDebutPartie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonDebutPartieActionPerformed(evt);
@@ -315,6 +316,7 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(boutonDebutPartie, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 970, -1, -1));
 
         boutonTirer.setText("Tirer");
+        boutonTirer.setEnabled(false);
         boutonTirer.setRolloverEnabled(false);
         boutonTirer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -324,6 +326,7 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(boutonTirer, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 910, -1, -1));
 
         boutonRester.setText("Rester");
+        boutonRester.setEnabled(false);
         boutonRester.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonResterActionPerformed(evt);
@@ -332,9 +335,11 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(boutonRester, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 910, -1, -1));
 
         boutonDoubler.setText("Doubler");
+        boutonDoubler.setEnabled(false);
         getContentPane().add(boutonDoubler, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 910, -1, -1));
 
         boutonPartager.setText("Partager");
+        boutonPartager.setEnabled(false);
         boutonPartager.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonPartagerActionPerformed(evt);
@@ -434,7 +439,7 @@ public class Plateau extends javax.swing.JFrame {
             boutonRester.setEnabled(false);
             boutonDoubler.setEnabled(false);
 
-            boutonNewPartie.setVisible(true);
+      
             boutonNewPartie.setEnabled(true);
 
             messVictoire.setText("VOUS AVEZ GAGNE !");
@@ -462,6 +467,9 @@ public class Plateau extends javax.swing.JFrame {
         bouton100.setEnabled(false);
         bouton5.setEnabled(false);
         boutonMiser.setEnabled(false);
+        
+        // atcive le bouton pour commencer a jouer
+        boutonDebutPartie.setEnabled(true);
 
         // Retire l'argent miser de l'argent totale              
         j.miser(miseJoueur);
