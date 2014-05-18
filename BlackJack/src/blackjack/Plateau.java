@@ -188,7 +188,7 @@ public class Plateau extends javax.swing.JFrame {
      * charge une image à partir d'un fichier utilise ImageIO
      *
      * @param fichImg chaine du nom de l'image
-     * @return
+     * @return img
      */
     private Image getImage(String fichImg) {
         //récup de l'URL du fichier

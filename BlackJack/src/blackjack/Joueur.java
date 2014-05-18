@@ -52,7 +52,7 @@ public class Joueur extends Personne{
      */
     /**
      * getter pour le plateau
-     * @return 
+     * @return argentTotal
      */
     public int getArgentTotal() {
         return argentTotal;
@@ -88,7 +88,7 @@ public class Joueur extends Personne{
     /**
      * Permet au joueur de d'arreter de piocher
      * @param stay
-     * @return 
+     * @return stay
      */
     public boolean rester(boolean stay) {
         stay = true;
@@ -106,7 +106,7 @@ public class Joueur extends Personne{
 
     /**
      * Permet au joueur de prendre une assurance lorsque le donneur à un As visible dans sa main de base
-     * @return 
+     * @return mise
      */
     public int assurance() {
         mise /= 2;
