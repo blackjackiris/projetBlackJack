@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 
 /**
  *
@@ -33,8 +34,11 @@ public class Plateau extends javax.swing.JFrame {
     private int valeurMainJoueur;
     private byte indiceDonneur;
     private byte indiceJoueur;
+    private byte mainUtilisee;  //Permet de savoir combien de mains supplémentaires à le joueur, et de tirer les cartes dans la bonne main
     private int miseJoueur;
+    private int miseAssurance;
     private boolean choixAssurance;
+    private boolean propAssurance;
     private final int DECALAGEGAUCHE = 16;
     private final int DECALAGEBAS = 32;
     private final int x = 16;
@@ -93,26 +97,22 @@ public class Plateau extends javax.swing.JFrame {
             miseJoueur = 0;
             valeurMise.setText("0");
             argent.setText(String.valueOf((j.getArgentTotal())));
-
-            boutonTirer.setEnabled(false);
-            boutonRester.setEnabled(false);
-            boutonDoubler.setEnabled(false);
-
-            boutonNewPartie.setEnabled(true);
+            
+            desactiverBouton(boutonTirer);
+            desactiverBouton(boutonRester);
+            desactiverBouton(boutonDoubler);
+            activerBouton(boutonNewPartie);
 
         } else {
-
-            boutonTirer.setEnabled(false);
-            boutonRester.setEnabled(false);
-            boutonDoubler.setEnabled(false);
-
-            boutonNewPartie.setEnabled(true);
+            desactiverBouton(boutonTirer);
+            desactiverBouton(boutonRester);
+            desactiverBouton(boutonDoubler);
+            activerBouton(boutonNewPartie);
             messVictoire.setText("VOUS AVEZ PERDU !");
 
             miseJoueur = 0;
             valeurMise.setText("0");
             argent.setText(String.valueOf((j.getArgentTotal())));
-
         }
     }
     
@@ -125,11 +125,11 @@ public class Plateau extends javax.swing.JFrame {
         //Affiche ou efface le boutton Assurance
         carte1 = d.main.getCarteDansMain(0);
         
-        if(carte1.getValeur() == 1 && choixAssurance == false){
-            boutonAssurance.setEnabled(true);
+        if(carte1.getValeur() == 1 && choixAssurance == false && propAssurance == false){
+            activerBouton(boutonAssurance);
         }
         else{
-            boutonAssurance.setEnabled(false);
+            desactiverBouton(boutonAssurance);
         }
         
         //Affiche ou efface le boutton Doubler
@@ -138,18 +138,18 @@ public class Plateau extends javax.swing.JFrame {
         val = carte1.getValeur() + carte2.getValeur();
         
         if(val >= 9 && val <= 11){
-            boutonDoubler.setEnabled(true);
+            activerBouton(boutonDoubler);
         }
         else{
-            boutonDoubler.setEnabled(false);
+            desactiverBouton(boutonDoubler);
         }
         
         //Affiche ou efface le boutton Partager
         if(carte1.getValeur() == carte2.getValeur()){
-            boutonPartager.setEnabled(true);
+            activerBouton(boutonPartager);
         }
         else{
-            boutonPartager.setEnabled(true);
+            desactiverBouton(boutonPartager);
         }
     }
     
@@ -161,10 +161,26 @@ public class Plateau extends javax.swing.JFrame {
         Graphics monDC;
         monDC = getGraphics();
         
-        String id = d.main.getIdSecondeCarte();
+        String id = d.main.getIdCarteSelec(1);
         img = getImage(id);
         monDC.drawImage(img, 582, 250, null);
         valMainD.setText(String.valueOf((d.main.getValeurMain())));
+    }
+    
+    public void verifPropAssurance(){
+        if(boutonAssurance.isEnabled() == true){
+            propAssurance = true;
+        }
+    }
+    
+    public void activerBouton(JButton bouton){
+        bouton.setEnabled(true);
+        bouton.setVisible(true);
+    }
+    
+    public void desactiverBouton(JButton bouton){
+        bouton.setEnabled(false);
+        bouton.setVisible(false);
     }
 
     /**
@@ -206,6 +222,7 @@ public class Plateau extends javax.swing.JFrame {
 
         boutonNewPartie = new javax.swing.JButton();
         boutonMiser = new javax.swing.JButton();
+        boutonRetirerMise = new javax.swing.JButton();
         bouton100 = new javax.swing.JButton();
         bouton10 = new javax.swing.JButton();
         bouton5 = new javax.swing.JButton();
@@ -223,7 +240,7 @@ public class Plateau extends javax.swing.JFrame {
         valeurMise = new javax.swing.JLabel();
         argent = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        tapis = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -247,6 +264,14 @@ public class Plateau extends javax.swing.JFrame {
             }
         });
         getContentPane().add(boutonMiser, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 940, -1, -1));
+
+        boutonRetirerMise.setText("Retirer Mise");
+        boutonRetirerMise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonRetirerMiseActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boutonRetirerMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 980, -1, -1));
 
         bouton100.setText("100");
         bouton100.addActionListener(new java.awt.event.ActionListener() {
@@ -309,6 +334,11 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(boutonRester, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 910, -1, -1));
 
         boutonDoubler.setText("Doubler");
+        boutonDoubler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonDoublerActionPerformed(evt);
+            }
+        });
         getContentPane().add(boutonDoubler, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 910, -1, -1));
 
         boutonPartager.setText("Partager");
@@ -320,6 +350,11 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(boutonPartager, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 910, -1, -1));
 
         boutonAssurance.setText("Assurance");
+        boutonAssurance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonAssuranceActionPerformed(evt);
+            }
+        });
         getContentPane().add(boutonAssurance, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 910, -1, -1));
         getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 900, 50, 20));
         getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 870, 50, 20));
@@ -327,11 +362,11 @@ public class Plateau extends javax.swing.JFrame {
         jLabel1.setText("Argent total : ");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 880, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blackjack/image/TapisDeCartesBJ.png"))); // NOI18N
-        jLabel3.setAutoscrolls(true);
-        jLabel3.setFocusable(false);
-        jLabel3.setName(""); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 1024));
+        tapis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blackjack/image/TapisDeCartesBJ.png"))); // NOI18N
+        tapis.setAutoscrolls(true);
+        tapis.setFocusable(false);
+        tapis.setName(""); // NOI18N
+        getContentPane().add(tapis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 1024));
 
         jLabel2.setText("Valeur de la mise :");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 900, 140, 20));
@@ -355,31 +390,34 @@ public class Plateau extends javax.swing.JFrame {
         monDC = getGraphics();
 
         //le joueur joue
-        j.tirer(jeuDeCartes);
+        j.tirer(jeuDeCartes, mainUtilisee);
 
-        //monDC.drawString("titi est content", 200, 200);
         // affiche les cartes de la main du joueur
         String nomCarte = "image/" + j.main.getIdCarteMain() + ".png";
         Image img = getImage(nomCarte);
-        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600, null);
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600 + DECALAGEBAS * (mainUtilisee + 1), null);
 
         valMain.setText(String.valueOf((j.main.getValeurMain())));
 
         indiceJoueur++;
-        if (j.main.getValeurMain() > 21) {
-
-            boutonNewPartie.setEnabled(true);
-
-            messVictoire.setText("VOUS AVEZ PERDU !");
-
-            boutonTirer.setEnabled(false);
-            boutonRester.setEnabled(false);
-            boutonDoubler.setEnabled(false);
-
-        }
         
-        switchEtatBouttons();
-
+        //Vérifie si l'assurance à été proposée pour désactiver le bouton
+        verifPropAssurance();
+        
+        if (j.main.getValeurMain() > 21){
+            
+            //Si le joueur à plus d'une main, continuer la partie sur la suivante, sinon DEFAITE
+            if(mainUtilisee > 0){
+                mainUtilisee --;
+                switchEtatBouttons();
+            }
+            else{
+                victoire();
+            }
+        }
+        else{
+            switchEtatBouttons();
+        }
     }//GEN-LAST:event_boutonTirerActionPerformed
 
     private void boutonResterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonResterActionPerformed
@@ -396,29 +434,15 @@ public class Plateau extends javax.swing.JFrame {
             String nomCarte = "image/" + d.main.getIdCarteMain() + ".png";
             Image img = getImage(nomCarte);
             monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 250, null);
-
+            valMainD.setText(String.valueOf((d.main.getValeurMain())));
             indiceDonneur++;
-
         }
-
-        valMainD.setText(String.valueOf((d.main.getValeurMain())));
-
-        if (d.main.getValeurMain() > 21) {
-
-            boutonTirer.setEnabled(false);
-            boutonRester.setEnabled(false);
-            boutonDoubler.setEnabled(false);
-
-            boutonNewPartie.setVisible(true);
-            boutonNewPartie.setEnabled(true);
-
-            messVictoire.setText("VOUS AVEZ GAGNE !");
-
-        } else {
-            victoire();
-        }
-
-
+        
+        //Vérifie si l'assurance à été proposée pour désactiver le bouton
+        verifPropAssurance();
+        
+        //Vérifie qui est le gagnant
+        victoire();
     }//GEN-LAST:event_boutonResterActionPerformed
 
     private void bouton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton100ActionPerformed
@@ -432,14 +456,14 @@ public class Plateau extends javax.swing.JFrame {
     private void boutonMiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonMiserActionPerformed
         // TODO add your handling code here:
 
-        // désactive les boutons de mise
-        bouton10.setEnabled(false);
-        bouton100.setEnabled(false);
-        bouton5.setEnabled(false);
-        boutonMiser.setEnabled(false);
+        //Désactive les boutons de mise
+        desactiverBouton(bouton5);
+        desactiverBouton(bouton10);
+        desactiverBouton(bouton100);
+        desactiverBouton(boutonMiser);
 
         // Retire l'argent miser de l'argent totale              
-        j.miser(miseJoueur);
+        j.miser(miseJoueur, (byte) (0) );
         argent.setText(String.valueOf((j.getArgentTotal())));
 
 
@@ -448,7 +472,7 @@ public class Plateau extends javax.swing.JFrame {
     private void boutonNewPartieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonNewPartieActionPerformed
 
         // vide la plateau
-        jLabel3.repaint();
+        tapis.repaint();
         
         messVictoire.setText("");
 
@@ -461,19 +485,19 @@ public class Plateau extends javax.swing.JFrame {
         valMainD.setText(String.valueOf((d.main.getValeurMain())));
 
         //Efface les boutons de jeu
-        boutonTirer.setEnabled(false);
-        boutonRester.setEnabled(false);
-        boutonDoubler.setEnabled(false);
-        boutonNewPartie.setEnabled(false);
+        desactiverBouton(boutonTirer);
+        desactiverBouton(boutonRester);
+        desactiverBouton(boutonDoubler);
+        desactiverBouton(boutonNewPartie);
 
         //Affiche les boutons de mise
-        bouton10.setEnabled(true);
-        bouton100.setEnabled(true);
-        bouton5.setEnabled(true);
-        boutonMiser.setEnabled(true);
+        activerBouton(bouton5);
+        activerBouton(bouton10);
+        activerBouton(bouton100);
+        activerBouton(boutonMiser);
         
         //Affiche le bouton pour commencer la partie
-        boutonDebutPartie.setEnabled(true);
+        activerBouton(boutonDebutPartie);
 
     }//GEN-LAST:event_boutonNewPartieActionPerformed
 
@@ -487,8 +511,54 @@ public class Plateau extends javax.swing.JFrame {
 
     private void boutonPartagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonPartagerActionPerformed
         // TODO add your handling code here:
+        Graphics monDC;
+        monDC = getGraphics();
+        String nomCarte;
+        Image img;
         
+        //Efface l'affichage des carte et le remet à jour
+        tapis.repaint();
         
+        indiceDonneur = 0;
+        nomCarte = "image/" + d.main.getIdCarteSelec(0)+ ".png";
+        img = getImage(nomCarte);
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 250, null);
+        valMainD.setText(String.valueOf((d.main.getValeurMain())));
+        indiceDonneur ++;
+        
+        img = getImage("blank.png");
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 250, null);
+        indiceDonneur ++;
+        
+        //Partage des 2 mains en deux
+        j.partager();
+        mainUtilisee ++;
+        //Attribution de la mise initial à la nouvelle main;
+        j.miser(miseJoueur, mainUtilisee);
+        
+        //Distribution d'une carte dans l'ancienne et la nouvelle main
+        j.tirer(jeuDeCartes, mainUtilisee);
+        j.tirer(jeuDeCartes, (byte) (mainUtilisee - 1));
+        
+        //Affichage des cartes
+        for(byte indice1 = 0; indice1 <= mainUtilisee; indice1 ++){
+            
+            if(indice1 == 0){
+                for(byte indice2 = 0; indice2 < j.main.getNbCarteMain(); indice2 ++){
+                    nomCarte = "image/" + j.main.getIdCarteSelec(indice2)+ ".png";
+                    img = getImage(nomCarte);
+                    monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indice2 + 1), 600 + DECALAGEBAS, null);
+                }
+            }
+            else{
+                for(byte indice2 = 0; indice2 < j.main.getNbCarteMain(); indice2 ++){
+                    nomCarte = "image/" + j.getMainJoueurSupp(indice1).getIdCarteSelec(indice2)+ ".png";
+                    img = getImage(nomCarte);
+                    monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600 + DECALAGEBAS * (indice1 + 1), null);              
+                }
+            }
+        }
+        valMain.setText(String.valueOf((j.getMainJoueurSupp(mainUtilisee).getValeurMain())));
     }//GEN-LAST:event_boutonPartagerActionPerformed
 
     private void boutonDebutPartieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonDebutPartieActionPerformed
@@ -500,16 +570,22 @@ public class Plateau extends javax.swing.JFrame {
         monDC = getGraphics();
         
         //Efface le bouton de début de partie
-        boutonDebutPartie.setEnabled(false);
+        desactiverBouton(boutonDebutPartie);
         
         //Affiche les boutons de jeu
-        boutonTirer.setEnabled(true);
-        boutonRester.setEnabled(true);
-        boutonDoubler.setEnabled(true);
+        activerBouton(boutonTirer);
+        activerBouton(boutonRester);
+        activerBouton(boutonDoubler);
         
-        //Indices Joueur et Donneur remis à zero
+        //Indices Joueur et Donneur remis à zero, initialisations des attributs
         indiceJoueur = 0;
         indiceDonneur = 0;
+        mainUtilisee = 0;
+        j.setIndiceMainSupZero();
+        jeuDeCartes = new PaquetDeCartes();
+        choixAssurance = false;
+        propAssurance = false;
+        miseAssurance = 0;
         
         //Le donneur tire une carte face visible
         d.tirer(jeuDeCartes);
@@ -523,14 +599,14 @@ public class Plateau extends javax.swing.JFrame {
         j.tirer(jeuDeCartes);
         nomCarte = "image/" + j.main.getIdCarteMain() + ".png";
         img = getImage(nomCarte);
-        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600, null);
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600 + DECALAGEBAS * (mainUtilisee + 1), null);
         valMain.setText(String.valueOf((j.main.getValeurMain())));
         indiceJoueur ++;
         
         //Le donneur tire une carte face cachée
         d.tirer(jeuDeCartes);
         img = getImage("blank.png");
-        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 600, null);
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 250, null);
         //Ici, l'affichage de la valeur de la main du donneur n'est pas mis à jour, pour garder la valeur de la carte face cachée secrete
         indiceDonneur ++;
         
@@ -538,11 +614,66 @@ public class Plateau extends javax.swing.JFrame {
         j.tirer(jeuDeCartes);
         nomCarte = "image/" + j.main.getIdCarteMain() + ".png";
         img = getImage(nomCarte);
-        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600, null);
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600 + DECALAGEBAS * (mainUtilisee + 1), null);
         valMain.setText(String.valueOf((j.main.getValeurMain())));
         indiceJoueur ++;
-        
     }//GEN-LAST:event_boutonDebutPartieActionPerformed
+
+    private void boutonRetirerMiseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonRetirerMiseActionPerformed
+        // TODO add your handling code here:
+        
+        //Annule la mise
+        j.argentGagne(miseJoueur);
+        miseJoueur = 0;
+        valeurMise.setText(String.valueOf(miseJoueur));
+    }//GEN-LAST:event_boutonRetirerMiseActionPerformed
+
+    private void boutonAssuranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonAssuranceActionPerformed
+        // TODO add your handling code here:
+        
+        choixAssurance = true;
+        propAssurance = true;
+        miseJoueur = j.assurance();
+        miseAssurance = miseJoueur;
+    }//GEN-LAST:event_boutonAssuranceActionPerformed
+
+    private void boutonDoublerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonDoublerActionPerformed
+        // TODO add your handling code here:
+        
+        Graphics monDC;
+        monDC = getGraphics();
+
+        //le joueur double et joue
+        j.doubler(jeuDeCartes, mainUtilisee, miseJoueur);
+
+        // affiche les cartes de la main du joueur
+        String nomCarte = "image/" + j.main.getIdCarteMain() + ".png";
+        Image img = getImage(nomCarte);
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600 + DECALAGEBAS * (mainUtilisee + 1), null);
+
+        valMain.setText(String.valueOf((j.main.getValeurMain())));
+
+        indiceJoueur++;
+        
+        //Vérifie si l'assurance à été proposée pour désactiver le bouton
+        verifPropAssurance();
+        
+        if (j.main.getValeurMain() > 21){
+            
+            //Si le joueur à plus d'une main, continuer la partie sur la suivante, sinon DEFAITE
+            if(mainUtilisee > 0){
+                mainUtilisee --;
+                switchEtatBouttons();
+            }
+            else{
+                victoire();
+            }
+        }
+        else{
+            switchEtatBouttons();
+        }
+        
+    }//GEN-LAST:event_boutonDoublerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -596,13 +727,14 @@ public class Plateau extends javax.swing.JFrame {
     private javax.swing.JButton boutonNewPartie;
     private javax.swing.JButton boutonPartager;
     private javax.swing.JButton boutonRester;
+    private javax.swing.JButton boutonRetirerMise;
     private javax.swing.JButton boutonTirer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel messVictoire;
+    private javax.swing.JLabel tapis;
     private javax.swing.JLabel valMain;
     private javax.swing.JLabel valMainD;
     private javax.swing.JLabel valeurMise;
