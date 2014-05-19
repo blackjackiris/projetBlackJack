@@ -36,9 +36,11 @@ public class Plateau extends javax.swing.JFrame {
     private byte indiceJoueur;
     private byte mainUtilisee;  //Permet de savoir combien de mains supplémentaires à le joueur, et de tirer les cartes dans la bonne main
     private int miseJoueur;
+    private int miseValidee;
     private int miseAssurance;
     private boolean choixAssurance;
     private boolean propAssurance;
+    private boolean propDoubler;
     private final int DECALAGEGAUCHE = 16;
     private final int DECALAGEBAS = 32;
     private final int x = 16;
@@ -53,12 +55,20 @@ public class Plateau extends javax.swing.JFrame {
         d = new Donneur();
         jeuDeCartes = new PaquetDeCartes();
         choixAssurance = false;
+        propAssurance = false;
+        propDoubler = false;
         indiceDonneur = 0;
         indiceJoueur = 0;
 
         miseJoueur = j.getMise();
         valeurMainDonneur = d.main.getValeurMain();
         valeurMainJoueur = j.main.getValeurMain();
+        
+//        boutonTirer.setEnabled(false);
+//        boutonRester.setEnabled(false);
+//        boutonDoubler.setEnabled(false);
+//        boutonPartager.setEnabled(false);
+//        boutonAssurance.setEnabled(false);
 
         initComponents();
         Graphics monDC;
@@ -98,16 +108,16 @@ public class Plateau extends javax.swing.JFrame {
             valeurMise.setText("0");
             argent.setText(String.valueOf((j.getArgentTotal())));
             
-            desactiverBouton(boutonTirer);
-            desactiverBouton(boutonRester);
-            desactiverBouton(boutonDoubler);
-            activerBouton(boutonNewPartie);
+            boutonTirer.setEnabled(false);
+            boutonRester.setEnabled(false);
+            boutonDoubler.setEnabled(false);
+            boutonNewPartie.setEnabled(true);
 
         } else {
-            desactiverBouton(boutonTirer);
-            desactiverBouton(boutonRester);
-            desactiverBouton(boutonDoubler);
-            activerBouton(boutonNewPartie);
+            boutonTirer.setEnabled(false);
+            boutonRester.setEnabled(false);
+            boutonDoubler.setEnabled(false);
+            boutonNewPartie.setEnabled(true);
             messVictoire.setText("VOUS AVEZ PERDU !");
 
             miseJoueur = 0;
@@ -126,10 +136,11 @@ public class Plateau extends javax.swing.JFrame {
         carte1 = d.main.getCarteDansMain(0);
         
         if(carte1.getValeur() == 1 && choixAssurance == false && propAssurance == false){
-            activerBouton(boutonAssurance);
+            boutonAssurance.setEnabled(true);
+            propAssurance = true;
         }
         else{
-            desactiverBouton(boutonAssurance);
+            boutonAssurance.setEnabled(false);
         }
         
         //Affiche ou efface le boutton Doubler
@@ -137,19 +148,20 @@ public class Plateau extends javax.swing.JFrame {
         carte2 = j.main.getCarteDansMain(1);
         val = carte1.getValeur() + carte2.getValeur();
         
-        if(val >= 9 && val <= 11){
-            activerBouton(boutonDoubler);
+        if(val > 8 && val < 12 && propDoubler == false){
+            boutonDoubler.setEnabled(true);
+            propDoubler = true;
         }
         else{
-            desactiverBouton(boutonDoubler);
+            boutonDoubler.setEnabled(false);
         }
         
         //Affiche ou efface le boutton Partager
         if(carte1.getValeur() == carte2.getValeur()){
-            activerBouton(boutonPartager);
+            boutonPartager.setEnabled(true);
         }
         else{
-            desactiverBouton(boutonPartager);
+            boutonPartager.setEnabled(false);
         }
     }
     
@@ -171,16 +183,6 @@ public class Plateau extends javax.swing.JFrame {
         if(boutonAssurance.isEnabled() == true){
             propAssurance = true;
         }
-    }
-    
-    public void activerBouton(JButton bouton){
-        bouton.setEnabled(true);
-        bouton.setVisible(true);
-    }
-    
-    public void desactiverBouton(JButton bouton){
-        bouton.setEnabled(false);
-        bouton.setVisible(false);
     }
 
     /**
@@ -221,7 +223,7 @@ public class Plateau extends javax.swing.JFrame {
     private void initComponents() {
 
         boutonNewPartie = new javax.swing.JButton();
-        boutonMiser = new javax.swing.JButton();
+        boutonMiserCommencer = new javax.swing.JButton();
         boutonRetirerMise = new javax.swing.JButton();
         bouton100 = new javax.swing.JButton();
         bouton10 = new javax.swing.JButton();
@@ -231,7 +233,6 @@ public class Plateau extends javax.swing.JFrame {
         messVictoire = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         valMain = new javax.swing.JLabel();
-        boutonDebutPartie = new javax.swing.JButton();
         boutonTirer = new javax.swing.JButton();
         boutonRester = new javax.swing.JButton();
         boutonDoubler = new javax.swing.JButton();
@@ -250,20 +251,21 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         boutonNewPartie.setText("Rejouer");
+        boutonNewPartie.setEnabled(false);
         boutonNewPartie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonNewPartieActionPerformed(evt);
             }
         });
-        getContentPane().add(boutonNewPartie, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 970, -1, -1));
+        getContentPane().add(boutonNewPartie, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 950, -1, -1));
 
-        boutonMiser.setText("Miser");
-        boutonMiser.addActionListener(new java.awt.event.ActionListener() {
+        boutonMiserCommencer.setText("Miser/Commencer");
+        boutonMiserCommencer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boutonMiserActionPerformed(evt);
+                boutonMiserCommencerActionPerformed(evt);
             }
         });
-        getContentPane().add(boutonMiser, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 940, -1, -1));
+        getContentPane().add(boutonMiserCommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 940, -1, -1));
 
         boutonRetirerMise.setText("Retirer Mise");
         boutonRetirerMise.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +273,7 @@ public class Plateau extends javax.swing.JFrame {
                 boutonRetirerMiseActionPerformed(evt);
             }
         });
-        getContentPane().add(boutonRetirerMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 980, -1, -1));
+        getContentPane().add(boutonRetirerMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 940, -1, -1));
 
         bouton100.setText("100");
         bouton100.addActionListener(new java.awt.event.ActionListener() {
@@ -299,24 +301,17 @@ public class Plateau extends javax.swing.JFrame {
 
         jLabel5.setText("Valeur de la main ");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
-        getContentPane().add(valMainD, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 40, 30));
+        getContentPane().add(valMainD, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 40, 30));
 
         messVictoire.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         getContentPane().add(messVictoire, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 860, 340, 140));
 
         jLabel4.setText("Valeur de la main");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 610, -1, -1));
-        getContentPane().add(valMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 70, 50));
-
-        boutonDebutPartie.setText("Commencer");
-        boutonDebutPartie.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boutonDebutPartieActionPerformed(evt);
-            }
-        });
-        getContentPane().add(boutonDebutPartie, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 970, -1, -1));
+        getContentPane().add(valMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 600, 60, 30));
 
         boutonTirer.setText("Tirer");
+        boutonTirer.setEnabled(false);
         boutonTirer.setRolloverEnabled(false);
         boutonTirer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,6 +321,7 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(boutonTirer, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 910, -1, -1));
 
         boutonRester.setText("Rester");
+        boutonRester.setEnabled(false);
         boutonRester.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonResterActionPerformed(evt);
@@ -334,6 +330,7 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(boutonRester, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 910, -1, -1));
 
         boutonDoubler.setText("Doubler");
+        boutonDoubler.setEnabled(false);
         boutonDoubler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonDoublerActionPerformed(evt);
@@ -342,6 +339,7 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(boutonDoubler, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 910, -1, -1));
 
         boutonPartager.setText("Partager");
+        boutonPartager.setEnabled(false);
         boutonPartager.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonPartagerActionPerformed(evt);
@@ -350,6 +348,7 @@ public class Plateau extends javax.swing.JFrame {
         getContentPane().add(boutonPartager, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 910, -1, -1));
 
         boutonAssurance.setText("Assurance");
+        boutonAssurance.setEnabled(false);
         boutonAssurance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonAssuranceActionPerformed(evt);
@@ -357,7 +356,7 @@ public class Plateau extends javax.swing.JFrame {
         });
         getContentPane().add(boutonAssurance, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 910, -1, -1));
         getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 900, 50, 20));
-        getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 870, 50, 20));
+        getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 880, 50, 20));
 
         jLabel1.setText("Argent total : ");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 880, -1, -1));
@@ -434,9 +433,13 @@ public class Plateau extends javax.swing.JFrame {
             String nomCarte = "image/" + d.main.getIdCarteMain() + ".png";
             Image img = getImage(nomCarte);
             monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 250, null);
-            valMainD.setText(String.valueOf((d.main.getValeurMain())));
+
             indiceDonneur++;
+
         }
+        
+        valMainD.setText(String.valueOf((d.main.getValeurMain())));
+        valMain.setText(String.valueOf((j.main.getValeurMain())));
         
         //Vérifie si l'assurance à été proposée pour désactiver le bouton
         verifPropAssurance();
@@ -453,21 +456,74 @@ public class Plateau extends javax.swing.JFrame {
 
     }//GEN-LAST:event_bouton100ActionPerformed
 
-    private void boutonMiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonMiserActionPerformed
+    private void boutonMiserCommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonMiserCommencerActionPerformed
         // TODO add your handling code here:
-
+        
+        String nomCarte;
+        Image img;
+        Graphics monDC;
+        monDC = getGraphics();
+        
         //Désactive les boutons de mise
-        desactiverBouton(bouton5);
-        desactiverBouton(bouton10);
-        desactiverBouton(bouton100);
-        desactiverBouton(boutonMiser);
+        bouton5.setEnabled(false);
+        bouton10.setEnabled(false);
+        bouton100.setEnabled(false);
+        boutonMiserCommencer.setEnabled(false);
+        boutonRetirerMise.setEnabled(false);
 
         // Retire l'argent miser de l'argent totale              
-        j.miser(miseJoueur, (byte) (0) );
+        miseValidee = j.miser(miseJoueur, (byte) (0) );
         argent.setText(String.valueOf((j.getArgentTotal())));
+        valeurMise.setText(String.valueOf(miseValidee));
 
+        //Affiche les boutons de jeu
+        boutonTirer.setEnabled(true);
+        boutonRester.setEnabled(true);
 
-    }//GEN-LAST:event_boutonMiserActionPerformed
+        //Indices Joueur et Donneur remis à zero, initialisations des attributs
+        indiceJoueur = 0;
+        indiceDonneur = 0;
+        mainUtilisee = 0;
+        j.setIndiceMainSupZero();
+        jeuDeCartes = new PaquetDeCartes();
+        choixAssurance = false;
+        propAssurance = false;
+        miseAssurance = 0;
+        miseJoueur = 0;
+
+        //Le donneur tire une carte face visible
+        d.tirer(jeuDeCartes);
+        nomCarte = "image/" + d.main.getIdCarteMain() + ".png";
+        img = getImage(nomCarte);
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 250, null);
+        valMainD.setText(String.valueOf((d.main.getValeurMain())));
+        indiceDonneur ++;
+
+        //Le joueur tire une carte face visible
+        j.tirer(jeuDeCartes);
+        nomCarte = "image/" + j.main.getIdCarteMain() + ".png";
+        img = getImage(nomCarte);
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600 + DECALAGEBAS * (mainUtilisee + 1), null);
+        valMain.setText(String.valueOf((j.main.getValeurMain())));
+        indiceJoueur ++;
+
+        //Le donneur tire une carte face cachée
+        d.tirer(jeuDeCartes);
+        img = getImage("image/blank.png");
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 250, null);
+        //Ici, l'affichage de la valeur de la main du donneur n'est pas mis à jour, pour garder la valeur de la carte face cachée secrete
+        indiceDonneur ++;
+
+        //Le joueur tire une carte face visible
+        j.tirer(jeuDeCartes);
+        nomCarte = "image/" + j.main.getIdCarteMain() + ".png";
+        img = getImage(nomCarte);
+        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600 + DECALAGEBAS * (mainUtilisee + 1), null);
+        valMain.setText(String.valueOf((j.main.getValeurMain())));
+        indiceJoueur ++;
+        
+        switchEtatBouttons();
+    }//GEN-LAST:event_boutonMiserCommencerActionPerformed
 
     private void boutonNewPartieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonNewPartieActionPerformed
 
@@ -475,6 +531,7 @@ public class Plateau extends javax.swing.JFrame {
         tapis.repaint();
         
         messVictoire.setText("");
+        valeurMise.setText("");
 
         // vide la main du joueur
         j.main.viderMain();
@@ -485,19 +542,19 @@ public class Plateau extends javax.swing.JFrame {
         valMainD.setText(String.valueOf((d.main.getValeurMain())));
 
         //Efface les boutons de jeu
-        desactiverBouton(boutonTirer);
-        desactiverBouton(boutonRester);
-        desactiverBouton(boutonDoubler);
-        desactiverBouton(boutonNewPartie);
+        boutonTirer.setEnabled(false);
+        boutonRester.setEnabled(false);
+        boutonDoubler.setEnabled(false);
+        boutonPartager.setEnabled(false);
+        boutonAssurance.setEnabled(false);
+        boutonNewPartie.setEnabled(false);
 
         //Affiche les boutons de mise
-        activerBouton(bouton5);
-        activerBouton(bouton10);
-        activerBouton(bouton100);
-        activerBouton(boutonMiser);
-        
-        //Affiche le bouton pour commencer la partie
-        activerBouton(boutonDebutPartie);
+        bouton5.setEnabled(true);
+        bouton10.setEnabled(true);
+        bouton100.setEnabled(true);
+        boutonMiserCommencer.setEnabled(true);
+        boutonRetirerMise.setEnabled(true);
 
     }//GEN-LAST:event_boutonNewPartieActionPerformed
 
@@ -559,65 +616,9 @@ public class Plateau extends javax.swing.JFrame {
             }
         }
         valMain.setText(String.valueOf((j.getMainJoueurSupp(mainUtilisee).getValeurMain())));
+        
+        switchEtatBouttons();
     }//GEN-LAST:event_boutonPartagerActionPerformed
-
-    private void boutonDebutPartieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonDebutPartieActionPerformed
-        // TODO add your handling code here:
-        
-        String nomCarte;
-        Image img;
-        Graphics monDC;
-        monDC = getGraphics();
-        
-        //Efface le bouton de début de partie
-        desactiverBouton(boutonDebutPartie);
-        
-        //Affiche les boutons de jeu
-        activerBouton(boutonTirer);
-        activerBouton(boutonRester);
-        activerBouton(boutonDoubler);
-        
-        //Indices Joueur et Donneur remis à zero, initialisations des attributs
-        indiceJoueur = 0;
-        indiceDonneur = 0;
-        mainUtilisee = 0;
-        j.setIndiceMainSupZero();
-        jeuDeCartes = new PaquetDeCartes();
-        choixAssurance = false;
-        propAssurance = false;
-        miseAssurance = 0;
-        
-        //Le donneur tire une carte face visible
-        d.tirer(jeuDeCartes);
-        nomCarte = "image/" + d.main.getIdCarteMain() + ".png";
-        img = getImage(nomCarte);
-        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 250, null);
-        valMainD.setText(String.valueOf((d.main.getValeurMain())));
-        indiceDonneur ++;
-        
-        //Le joueur tire une carte face visible
-        j.tirer(jeuDeCartes);
-        nomCarte = "image/" + j.main.getIdCarteMain() + ".png";
-        img = getImage(nomCarte);
-        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600 + DECALAGEBAS * (mainUtilisee + 1), null);
-        valMain.setText(String.valueOf((j.main.getValeurMain())));
-        indiceJoueur ++;
-        
-        //Le donneur tire une carte face cachée
-        d.tirer(jeuDeCartes);
-        img = getImage("blank.png");
-        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceDonneur + 1), 250, null);
-        //Ici, l'affichage de la valeur de la main du donneur n'est pas mis à jour, pour garder la valeur de la carte face cachée secrete
-        indiceDonneur ++;
-        
-        //Le joueur tire une carte face visible
-        j.tirer(jeuDeCartes);
-        nomCarte = "image/" + j.main.getIdCarteMain() + ".png";
-        img = getImage(nomCarte);
-        monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600 + DECALAGEBAS * (mainUtilisee + 1), null);
-        valMain.setText(String.valueOf((j.main.getValeurMain())));
-        indiceJoueur ++;
-    }//GEN-LAST:event_boutonDebutPartieActionPerformed
 
     private void boutonRetirerMiseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonRetirerMiseActionPerformed
         // TODO add your handling code here:
@@ -635,6 +636,8 @@ public class Plateau extends javax.swing.JFrame {
         propAssurance = true;
         miseJoueur = j.assurance();
         miseAssurance = miseJoueur;
+        
+        switchEtatBouttons();
     }//GEN-LAST:event_boutonAssuranceActionPerformed
 
     private void boutonDoublerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonDoublerActionPerformed
@@ -721,9 +724,8 @@ public class Plateau extends javax.swing.JFrame {
     private javax.swing.JButton bouton100;
     private javax.swing.JButton bouton5;
     private javax.swing.JButton boutonAssurance;
-    private javax.swing.JButton boutonDebutPartie;
     private javax.swing.JButton boutonDoubler;
-    private javax.swing.JButton boutonMiser;
+    private javax.swing.JButton boutonMiserCommencer;
     private javax.swing.JButton boutonNewPartie;
     private javax.swing.JButton boutonPartager;
     private javax.swing.JButton boutonRester;

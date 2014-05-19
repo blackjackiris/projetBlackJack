@@ -33,26 +33,27 @@
     <Component class="javax.swing.JButton" name="boutonNewPartie">
       <Properties>
         <Property name="text" type="java.lang.String" value="Rejouer"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonNewPartieActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="640" y="970" width="-1" height="-1"/>
+          <AbsoluteConstraints x="640" y="950" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="boutonMiser">
+    <Component class="javax.swing.JButton" name="boutonMiserCommencer">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Miser"/>
+        <Property name="text" type="java.lang.String" value="Miser/Commencer"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonMiserActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonMiserCommencerActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="80" y="940" width="-1" height="-1"/>
+          <AbsoluteConstraints x="40" y="940" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -65,7 +66,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="60" y="980" width="-1" height="-1"/>
+          <AbsoluteConstraints x="170" y="940" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -121,7 +122,7 @@
     <Component class="javax.swing.JLabel" name="valMainD">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="230" y="270" width="40" height="30"/>
+          <AbsoluteConstraints x="240" y="270" width="40" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -150,26 +151,14 @@
     <Component class="javax.swing.JLabel" name="valMain">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="210" y="590" width="70" height="50"/>
-        </Constraint>
-      </Constraints>
-    </Component>
-    <Component class="javax.swing.JButton" name="boutonDebutPartie">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Commencer"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonDebutPartieActionPerformed"/>
-      </Events>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="730" y="970" width="-1" height="-1"/>
+          <AbsoluteConstraints x="220" y="600" width="60" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="boutonTirer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tirer"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="rolloverEnabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -184,6 +173,7 @@
     <Component class="javax.swing.JButton" name="boutonRester">
       <Properties>
         <Property name="text" type="java.lang.String" value="Rester"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonResterActionPerformed"/>
@@ -197,6 +187,7 @@
     <Component class="javax.swing.JButton" name="boutonDoubler">
       <Properties>
         <Property name="text" type="java.lang.String" value="Doubler"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonDoublerActionPerformed"/>
@@ -210,6 +201,7 @@
     <Component class="javax.swing.JButton" name="boutonPartager">
       <Properties>
         <Property name="text" type="java.lang.String" value="Partager"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonPartagerActionPerformed"/>
@@ -223,6 +215,7 @@
     <Component class="javax.swing.JButton" name="boutonAssurance">
       <Properties>
         <Property name="text" type="java.lang.String" value="Assurance"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonAssuranceActionPerformed"/>
@@ -243,7 +236,7 @@
     <Component class="javax.swing.JLabel" name="argent">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="300" y="870" width="50" height="20"/>
+          <AbsoluteConstraints x="300" y="880" width="50" height="20"/>
         </Constraint>
       </Constraints>
     </Component>

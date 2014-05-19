@@ -79,7 +79,7 @@ public class Joueur extends Personne{
         indiceMainSup = 0;
     }
     
-    public void miser(int miseJ, byte nroMain) {
+    public int miser(int miseJ, byte nroMain) {
         argentTotal = argentTotal - miseJ;
         if(nroMain == 0){
             main.setMiseAttribuee(miseJ);
@@ -87,6 +87,8 @@ public class Joueur extends Personne{
         else{
             mainMultiple[nroMain].setMiseAttribuee(miseJ);
         }
+        
+        return miseJ;
     }
     
     public void argentGagne(int argent){
