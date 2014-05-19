@@ -101,6 +101,11 @@ public class Main {
         return idCarte;
     }
     
+    public int getValCarteSelecDansMain(byte nro){
+        int val = main[nro].getValeur();
+        return val;
+    }
+    
     public void setMiseAttribuee(int mise){
         miseAttribuee = mise;
     }

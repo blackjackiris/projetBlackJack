@@ -114,6 +114,11 @@ public class Plateau extends javax.swing.JFrame {
             boutonDoubler.setEnabled(false);
             boutonNewPartie.setEnabled(true);
             messVictoire.setText("VOUS AVEZ PERDU !");
+            
+            //Si le donneur avait un blackjack avec 2 cartes et que le joueur à choisie une assurance, rendre l'assurance au joueur
+            if(d.main.getValCarteSelecDansMain((byte)(0)) + d.main.getValCarteSelecDansMain((byte)(1)) == BLACKJACK){
+                j.argentGagne(miseAssurance);
+            }
 
             miseJoueur = 0;
             valeurMise.setText("0");
@@ -660,6 +665,9 @@ public class Plateau extends javax.swing.JFrame {
         propAssurance = true;
         miseValidee = j.assurance();
         miseAssurance = miseValidee;
+        
+        valeurMise.setText(String.valueOf(miseValidee));
+        valAssurance.setText(String.valueOf(miseAssurance));
         
         switchEtatBouttons();
     }//GEN-LAST:event_boutonAssuranceActionPerformed
