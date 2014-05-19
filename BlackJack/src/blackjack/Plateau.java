@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
@@ -63,12 +64,6 @@ public class Plateau extends javax.swing.JFrame {
         miseJoueur = j.getMise();
         valeurMainDonneur = d.main.getValeurMain();
         valeurMainJoueur = j.main.getValeurMain();
-        
-//        boutonTirer.setEnabled(false);
-//        boutonRester.setEnabled(false);
-//        boutonDoubler.setEnabled(false);
-//        boutonPartager.setEnabled(false);
-//        boutonAssurance.setEnabled(false);
 
         initComponents();
         Graphics monDC;
@@ -102,9 +97,9 @@ public class Plateau extends javax.swing.JFrame {
         if (victoire == true) {
 
             messVictoire.setText("VOUS AVEZ GAGNE !");
-            miseJoueur = miseJoueur * 2;
-            j.argentGagne(miseJoueur);
-            miseJoueur = 0;
+            miseValidee = miseValidee * 2;
+            j.argentGagne(miseValidee);
+            miseValidee = 0;
             valeurMise.setText("0");
             argent.setText(String.valueOf((j.getArgentTotal())));
             
@@ -173,7 +168,7 @@ public class Plateau extends javax.swing.JFrame {
         Graphics monDC;
         monDC = getGraphics();
         
-        String id = d.main.getIdCarteSelec(1);
+        String id = "image/" + d.main.getIdCarteSelec(1) + ".png";
         img = getImage(id);
         monDC.drawImage(img, 582, 250, null);
         valMainD.setText(String.valueOf((d.main.getValeurMain())));
@@ -187,6 +182,8 @@ public class Plateau extends javax.swing.JFrame {
 
     /**
      * charge une image à partir d'un fichier utilise ImageIO
+     * dans le cas du jar, le fichier n'est pas directement accessible
+     * donc, créé une image à partir de l'url dans une imageIcone
      *
      * @param fichImg chaine du nom de l'image
      * @return
@@ -196,19 +193,32 @@ public class Plateau extends javax.swing.JFrame {
         Image img = null;
         URL url;
         URI ur = null;
-        File fichier;
+        File fichier = null;
         url = getClass().getResource(fichImg);
+        //System.out.println("url : " + url.toString());
         try {
             //convertit l'URL en URI
             ur = url.toURI();
         } catch (URISyntaxException ex) {
             Logger.getLogger(Plateau.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fichier = new File(ur);
-        try {
-            img = ImageIO.read(fichier);
-        } catch (IOException ex) {
-            Logger.getLogger(Plateau.class.getName()).log(Level.SEVERE, null, ex);
+        if (ur != null) {
+            //System.out.println("uri n'est pas null :" + ur.toString());
+            try {
+                fichier = new File(ur);
+                //System.out.println("fichier créé");
+                img = ImageIO.read(fichier);
+            } catch (IllegalArgumentException ie) {
+                //System.out.println("fichier non accessible url : " + url.toString());
+                ImageIcon icon;
+                icon = new ImageIcon(url);
+                //System.out.println("icone :" + icon.toString());
+                img = icon.getImage();
+            } catch (NullPointerException npe) {
+                System.out.println("ptr null");
+            } catch (IOException ex) {
+                Logger.getLogger(Plateau.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return img;
     }
@@ -226,23 +236,26 @@ public class Plateau extends javax.swing.JFrame {
         boutonMiserCommencer = new javax.swing.JButton();
         boutonRetirerMise = new javax.swing.JButton();
         bouton100 = new javax.swing.JButton();
+        bouton50 = new javax.swing.JButton();
         bouton10 = new javax.swing.JButton();
         bouton5 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        labelMainD = new javax.swing.JLabel();
         valMainD = new javax.swing.JLabel();
         messVictoire = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        labelMain = new javax.swing.JLabel();
         valMain = new javax.swing.JLabel();
         boutonTirer = new javax.swing.JButton();
         boutonRester = new javax.swing.JButton();
         boutonDoubler = new javax.swing.JButton();
         boutonPartager = new javax.swing.JButton();
         boutonAssurance = new javax.swing.JButton();
+        labelMise = new javax.swing.JLabel();
         valeurMise = new javax.swing.JLabel();
+        labelArgent = new javax.swing.JLabel();
         argent = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        labelAssurance = new javax.swing.JLabel();
+        valAssurance = new javax.swing.JLabel();
         tapis = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(null);
@@ -281,7 +294,15 @@ public class Plateau extends javax.swing.JFrame {
                 bouton100ActionPerformed(evt);
             }
         });
-        getContentPane().add(bouton100, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 890, -1, -1));
+        getContentPane().add(bouton100, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 900, -1, -1));
+
+        bouton50.setText("50");
+        bouton50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bouton50ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bouton50, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 900, 50, -1));
 
         bouton10.setText("10");
         bouton10.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +310,7 @@ public class Plateau extends javax.swing.JFrame {
                 bouton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(bouton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 890, -1, -1));
+        getContentPane().add(bouton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 870, 50, -1));
 
         bouton5.setText("5");
         bouton5.addActionListener(new java.awt.event.ActionListener() {
@@ -297,18 +318,18 @@ public class Plateau extends javax.swing.JFrame {
                 bouton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(bouton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 890, -1, -1));
+        getContentPane().add(bouton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 870, 50, -1));
 
-        jLabel5.setText("Valeur de la main ");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
+        labelMainD.setText("Valeur de la main ");
+        getContentPane().add(labelMainD, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
         getContentPane().add(valMainD, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 40, 30));
 
         messVictoire.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         getContentPane().add(messVictoire, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 860, 340, 140));
 
-        jLabel4.setText("Valeur de la main");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 610, -1, -1));
-        getContentPane().add(valMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 600, 60, 30));
+        labelMain.setText("Valeur de la main :");
+        getContentPane().add(labelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 590, -1, -1));
+        getContentPane().add(valMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 580, 60, 30));
 
         boutonTirer.setText("Tirer");
         boutonTirer.setEnabled(false);
@@ -355,20 +376,24 @@ public class Plateau extends javax.swing.JFrame {
             }
         });
         getContentPane().add(boutonAssurance, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 910, -1, -1));
-        getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 900, 50, 20));
-        getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 880, 50, 20));
 
-        jLabel1.setText("Argent total : ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 880, -1, -1));
+        labelMise.setText("Valeur de la mise :");
+        getContentPane().add(labelMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 880, 100, 20));
+        getContentPane().add(valeurMise, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 880, 50, 20));
+
+        labelArgent.setText("Argent total : ");
+        getContentPane().add(labelArgent, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 860, -1, -1));
+        getContentPane().add(argent, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 860, 50, 20));
+
+        labelAssurance.setText("Valeur assurance :");
+        getContentPane().add(labelAssurance, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 620, -1, -1));
+        getContentPane().add(valAssurance, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 610, 60, 30));
 
         tapis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blackjack/image/TapisDeCartesBJ.png"))); // NOI18N
         tapis.setAutoscrolls(true);
         tapis.setFocusable(false);
         tapis.setName(""); // NOI18N
         getContentPane().add(tapis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 1024));
-
-        jLabel2.setText("Valeur de la mise :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 900, 140, 20));
 
         pack();
         setLocationRelativeTo(null);
@@ -624,7 +649,6 @@ public class Plateau extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         //Annule la mise
-        j.argentGagne(miseJoueur);
         miseJoueur = 0;
         valeurMise.setText(String.valueOf(miseJoueur));
     }//GEN-LAST:event_boutonRetirerMiseActionPerformed
@@ -634,8 +658,8 @@ public class Plateau extends javax.swing.JFrame {
         
         choixAssurance = true;
         propAssurance = true;
-        miseJoueur = j.assurance();
-        miseAssurance = miseJoueur;
+        miseValidee = j.assurance();
+        miseAssurance = miseValidee;
         
         switchEtatBouttons();
     }//GEN-LAST:event_boutonAssuranceActionPerformed
@@ -647,7 +671,7 @@ public class Plateau extends javax.swing.JFrame {
         monDC = getGraphics();
 
         //le joueur double et joue
-        j.doubler(jeuDeCartes, mainUtilisee, miseJoueur);
+        miseValidee += j.doubler(jeuDeCartes, mainUtilisee, miseValidee);
 
         // affiche les cartes de la main du joueur
         String nomCarte = "image/" + j.main.getIdCarteMain() + ".png";
@@ -655,6 +679,7 @@ public class Plateau extends javax.swing.JFrame {
         monDC.drawImage(img, 550 + DECALAGEGAUCHE * (indiceJoueur + 1), 600 + DECALAGEBAS * (mainUtilisee + 1), null);
 
         valMain.setText(String.valueOf((j.main.getValeurMain())));
+        valeurMise.setText(String.valueOf(miseValidee));
 
         indiceJoueur++;
         
@@ -677,6 +702,12 @@ public class Plateau extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_boutonDoublerActionPerformed
+
+    private void bouton50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton50ActionPerformed
+        // TODO add your handling code here:
+        miseJoueur = miseJoueur + 50;
+        valeurMise.setText(String.valueOf(miseJoueur));
+    }//GEN-LAST:event_bouton50ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -723,6 +754,7 @@ public class Plateau extends javax.swing.JFrame {
     private javax.swing.JButton bouton10;
     private javax.swing.JButton bouton100;
     private javax.swing.JButton bouton5;
+    private javax.swing.JButton bouton50;
     private javax.swing.JButton boutonAssurance;
     private javax.swing.JButton boutonDoubler;
     private javax.swing.JButton boutonMiserCommencer;
@@ -731,12 +763,14 @@ public class Plateau extends javax.swing.JFrame {
     private javax.swing.JButton boutonRester;
     private javax.swing.JButton boutonRetirerMise;
     private javax.swing.JButton boutonTirer;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel labelArgent;
+    private javax.swing.JLabel labelAssurance;
+    private javax.swing.JLabel labelMain;
+    private javax.swing.JLabel labelMainD;
+    private javax.swing.JLabel labelMise;
     private javax.swing.JLabel messVictoire;
     private javax.swing.JLabel tapis;
+    private javax.swing.JLabel valAssurance;
     private javax.swing.JLabel valMain;
     private javax.swing.JLabel valMainD;
     private javax.swing.JLabel valeurMise;

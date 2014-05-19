@@ -124,9 +124,10 @@ public class Joueur extends Personne{
      * @param miseJ
      * @param nroMain
      */
-    public void doubler(PaquetDeCartes paquet, byte nroMain, int miseJ){
+    public int doubler(PaquetDeCartes paquet, byte nroMain, int miseJ){
         miser(miseJ, nroMain);
         tirer(paquet, nroMain);
+        return miseJ;
     }
 
     /**
